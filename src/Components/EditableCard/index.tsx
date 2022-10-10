@@ -16,10 +16,13 @@ import {
   TagLeftIcon,
   Text,
 } from '@chakra-ui/react';
+import { useEditableCard } from './hook/useEditableCard';
 
 function EditableCard() {
   const card = { id: 1, task: 'Task', tag: 'sucess' };
   const colorTag = 'BLUE';
+
+  const { finished, handleClickTag } = useEditableCard();
   return (
     <Box
       display='flex'
@@ -40,7 +43,7 @@ function EditableCard() {
           lineHeight='21px'
           variant='none'
         >
-          <EditablePreview />
+          <EditablePreview cursor='pointer' />
           <Input
             fontWeight='500'
             fontSize='16px'
@@ -56,20 +59,28 @@ function EditableCard() {
         <Icon as={BsTrashFill} color={colorTag} cursor={'pointer'} />
       </Flex>
       <Flex alignItems='center' justifyContent='space-between'>
-        <Text>
-          <Tag size={'sm'} variant='solid' bg={colorTag} fontStyle='italic'>
+        <Text onClick={handleClickTag} cursor='pointer' data-testid={`tag-${card.id}`}>
+          <Tag
+            size={'sm'}
+            variant='solid'
+            bg={colorTag}
+            fontStyle='italic'
+            _hover={{ opacity: '0.8', transitionDuration: '0.3s' }}
+          >
             <TagLeftIcon as={GiRapidshareArrow} />
             <TagLabel fontWeight='700' fontSize='12px' color='WHITE'>
               {card.tag}
             </TagLabel>
           </Tag>
         </Text>
-        <Flex color={'green.400'} alignItems='center' fontStyle='italic'>
-          <Icon as={BsCheckCircle} w='10px' h='12px' />
-          <Text ml='2px' fontSize='10px'>
-            Finished
-          </Text>
-        </Flex>
+        {finished && (
+          <Flex color={'green.400'} alignItems='center' fontStyle='italic'>
+            <Icon as={BsCheckCircle} w='10px' h='12px' />
+            <Text ml='2px' fontSize='10px'>
+              Finished
+            </Text>
+          </Flex>
+        )}
       </Flex>
     </Box>
   );
