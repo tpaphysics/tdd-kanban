@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import Counter from './Components/Example/Counter/Counter';
+import EditableCard from './Components/EditableCard';
 
 function App() {
   return (
@@ -11,7 +11,10 @@ function App() {
       backgroundRepeat='no-repeat'
       bgPosition='bottom'
       backgroundPosition='95% 80%'
-    ></Flex>
+      alignItems='center'
+    >
+      <EditableCard />
+    </Flex>
   );
 }
 
