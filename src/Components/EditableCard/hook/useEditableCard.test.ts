@@ -10,4 +10,12 @@ describe('useEditableCard hook test', () => {
     });
     expect(result.current.finished).toEqual(false);
   });
+  it('handleClickTag, should it updateded finished value for true', () => {
+    const { result } = renderHook(useEditableCard);
+
+    act(() => {
+      result.current.handleClickTag();
+    });
+    expect(result.current.finished).toEqual(true);
+  });
 });
