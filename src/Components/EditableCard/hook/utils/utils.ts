@@ -1,7 +1,8 @@
 function formatTask(task: string) {
   const max = 25;
   const size = task.length;
-  size > max ? `${task.substring(0, max - 3)}...` : task;
+  if (size > max) return `${task.substring(0, max - 3)}...`;
+  else return task;
 }
 
 export { formatTask };
