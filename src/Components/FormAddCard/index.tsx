@@ -17,7 +17,7 @@ import React from 'react';
 import { useFormAddCard } from './hook/useFormAddCard';
 
 function FormAddCard() {
-  const { show, handleToogle, newTask, handleChange } = useFormAddCard();
+  const { show, handleToogle, newTask, handleChange, handleClick } = useFormAddCard();
   return (
     <>
       <Box
@@ -71,6 +71,7 @@ function FormAddCard() {
             float='right'
             type='submit'
             size='md'
+            onClick={handleClick}
           >
             Add task
           </Button>

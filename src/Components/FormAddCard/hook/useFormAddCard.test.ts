@@ -37,7 +37,7 @@ describe('useFormAddCard hook test', () => {
 
     expect(result.current.newTask).toEqual('TEST');
   });
-  it('handleClick, should it updateded newTask empty value ', () => {
+  it('handleClick, should be updateded the newTask value for empty', () => {
     const { result } = renderHook(useFormAddCard);
 
     act(() => {
@@ -49,5 +49,18 @@ describe('useFormAddCard hook test', () => {
     });
 
     expect(result.current.newTask).toEqual('');
+  });
+  it('handleClick, should be updateded the show value for false', () => {
+    const { result } = renderHook(useFormAddCard);
+
+    act(() => {
+      result.current.setShow(true);
+    });
+
+    act(() => {
+      result.current.handleClick();
+    });
+
+    expect(result.current.show).toEqual(false);
   });
 });

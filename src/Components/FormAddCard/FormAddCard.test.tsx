@@ -53,4 +53,18 @@ describe('FormAddCard.tsx test', () => {
 
     expect(button).toHaveProperty('disabled', false);
   });
+
+  it('Should be updated input value for empty when click in (Add task) button', () => {
+    const { getByTestId } = render(<FormAddCard />);
+
+    const input = getByTestId('task-input') as HTMLInputElement;
+    const button = getByTestId('task-button');
+
+    fireEvent.change(input, { target: { value: 'TEST' } });
+    expect(input).toHaveProperty('value', 'TEST');
+
+    fireEvent.click(button);
+
+    expect(input).toHaveProperty('value', '');
+  });
 });

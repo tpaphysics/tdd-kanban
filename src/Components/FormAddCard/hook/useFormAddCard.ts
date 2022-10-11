@@ -14,6 +14,7 @@ export const useFormAddCard = () => {
 
   const handleClick = useCallback(() => {
     setNewTask('');
+    setShow(false);
   }, []);
 
   return { show, setShow, newTask, setNewTask, handleToogle, handleChange, handleClick };
