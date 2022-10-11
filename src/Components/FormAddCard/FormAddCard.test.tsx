@@ -41,4 +41,15 @@ describe('FormAddCard.tsx test', () => {
 
     expect(getByTestId('task-button').closest('button')).toBeDisabled();
   });
+  it('Should be disable button when change for TEST the value in input', () => {
+    const { getByTestId } = render(<FormAddCard />);
+
+    const input = getByTestId('task-input') as HTMLInputElement;
+    const button = getByTestId('task-button') as HTMLButtonElement;
+
+    fireEvent.change(input, { target: { value: 'TEST' } });
+    getByTestId('task-button');
+
+    expect(button.disabled).toBe(false);
+  });
 });
