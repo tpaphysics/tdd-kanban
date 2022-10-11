@@ -57,6 +57,7 @@ function EditableCard() {
             focusBorderColor={colorTag}
             onChange={handleEditTask}
             onBlur={handleOnBlur}
+            onKeyDown={handleOnBlur}
             value={task}
             px='2px'
             h='28px'

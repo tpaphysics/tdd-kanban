@@ -25,4 +25,12 @@ describe('EditableCard.tsx test', () => {
 
     expect(getByText('editingTask')).toBeInTheDocument();
   });
+  it('Should it set the task to (Edit task) when the entry is empty and the enter key is pressed', () => {
+    const { getByTestId, getByText } = render(<EditableCard />);
+    fireEvent.focus(getByTestId('editable-1'));
+    fireEvent.change(getByTestId('input-1'), { target: { value: '' } });
+    fireEvent.keyDown(getByTestId('input-1'));
+
+    expect(getByText('Edit task')).toBeInTheDocument();
+  });
 });
