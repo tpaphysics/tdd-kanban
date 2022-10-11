@@ -37,4 +37,17 @@ describe('useFormAddCard hook test', () => {
 
     expect(result.current.newTask).toEqual('TEST');
   });
+  it('handleClick, should it updateded newTask empty value ', () => {
+    const { result } = renderHook(useFormAddCard);
+
+    act(() => {
+      result.current.setNewTask('TASK');
+    });
+
+    act(() => {
+      result.current.handleClick();
+    });
+
+    expect(result.current.newTask).toEqual('');
+  });
 });

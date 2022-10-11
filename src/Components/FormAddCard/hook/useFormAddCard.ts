@@ -12,5 +12,9 @@ export const useFormAddCard = () => {
     setNewTask(event.target.value);
   }, []);
 
-  return { show, setShow, newTask, setNewTask, handleToogle, handleChange };
+  const handleClick = useCallback(() => {
+    setNewTask('');
+  }, []);
+
+  return { show, setShow, newTask, setNewTask, handleToogle, handleChange, handleClick };
 };
