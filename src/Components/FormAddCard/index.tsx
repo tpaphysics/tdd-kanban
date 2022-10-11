@@ -44,7 +44,13 @@ function FormAddCard() {
           <InputGroup variant='none' size='md' placeholder='New task' w='278px' borderRadius='5px'>
             <InputLeftElement
               pointerEvents='none'
-              children={<Icon as={GiGooeyEyedSun} color={newTask == '' ? 'gray.400' : 'BLUE'} />}
+              children={
+                <Icon
+                  data-testid='input-icon'
+                  as={GiGooeyEyedSun}
+                  color={newTask == '' ? 'gray.400' : 'BLUE'}
+                />
+              }
             />
             <Input
               data-testid='task-input'
