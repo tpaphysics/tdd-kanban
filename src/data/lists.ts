@@ -1,3 +1,4 @@
+import cards from './cards';
 import { IList } from './interfaces/IList';
 
 export default [
@@ -6,7 +7,7 @@ export default [
     title: '📝  To Do',
     bgList: 'BLUE',
     tag: 'sucess',
-    cards: [],
+    cards,
   },
   {
     id: '196700bc-b6ff-4e6b-ad1b-3be61d771db7',
