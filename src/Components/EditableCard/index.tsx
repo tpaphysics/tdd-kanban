@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsTrashFill } from 'react-icons/bs';
-import { GiRapidshareArrow } from 'react-icons/gi';
+import { GiRapidshareArrow, GiSupersonicArrow } from 'react-icons/gi';
 import { BsCheckCircle } from 'react-icons/bs';
 
 import {
@@ -75,7 +75,7 @@ function EditableCard() {
             fontStyle='italic'
             _hover={{ opacity: '0.8', transitionDuration: '0.3s' }}
           >
-            <TagLeftIcon as={GiRapidshareArrow} />
+            <TagLeftIcon as={finished ? GiSupersonicArrow : GiRapidshareArrow} />
             <TagLabel fontWeight='700' fontSize='12px' color='WHITE'>
               {card.tag}
             </TagLabel>
