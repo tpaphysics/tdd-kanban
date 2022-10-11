@@ -2,12 +2,20 @@ import { act, renderHook } from '@testing-library/react';
 import { describe, it } from 'vitest';
 import { useFormAddCard } from './useFormAddCard';
 
-describe('useEditableCard hook test', () => {
+describe('useFormAddCard hook test', () => {
   it('should be false show default value', () => {
     const { result } = renderHook(useFormAddCard);
     act(() => {
       result.current.show;
     });
     expect(result.current.show).toEqual(false);
+  });
+  it('handleToogle, should it updateded toogle value for true', () => {
+    const { result } = renderHook(useFormAddCard);
+
+    act(() => {
+      result.current.handleToogle();
+    });
+    expect(result.current.show).toEqual(true);
   });
 });
