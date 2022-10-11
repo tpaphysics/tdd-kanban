@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
 import { describe, it } from 'vitest';
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 
 import FormAddCard from '.';
 
@@ -33,5 +33,12 @@ describe('FormAddCard.tsx test', () => {
 
     expect(getByTestId('task-button')).toBeInTheDocument();
     expect(getByTestId('task-input')).toBeInTheDocument();
+  });
+  it('Should be disable the button when input is empty', () => {
+    const { getByTestId } = render(<FormAddCard />);
+
+    fireEvent.change(getByTestId('task-input'), { target: { value: '' } });
+
+    expect(getByTestId('task-button').closest('button')).toBeDisabled();
   });
 });
