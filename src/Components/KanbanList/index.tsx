@@ -3,7 +3,8 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import React from 'react';
 import EditableCard from '../EditableCard';
 import FormAddCard from '../FormAddCard';
-import KanbanListHeader from '../KanbanListHeader/KanbanListHeader';
+import KanbanListHeader from '../KanbanListHeader';
+import KanbanCardsContainer from '../KanbanCardsContainer';
 
 function KanbanList() {
   const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
@@ -20,10 +21,7 @@ function KanbanList() {
       borderTopColor='RGBA2'
     >
       <KanbanListHeader />
-      <VStack mt='8px'>
-        <EditableCard />
-        <EditableCard />
-      </VStack>
+      <KanbanCardsContainer />
       <FormAddCard />
     </Box>
   );
