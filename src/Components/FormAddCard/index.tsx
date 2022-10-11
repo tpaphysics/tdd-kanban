@@ -30,7 +30,11 @@ function FormAddCard() {
         cursor='pointer'
         onClick={handleToogle}
       >
-        <Icon as={show ? AiFillMinusCircle : IoMdAddCircle} />
+        {show ? (
+          <Icon as={AiFillMinusCircle} data-testid='icon-minus' />
+        ) : (
+          <Icon as={IoMdAddCircle} data-testid='icon-add' />
+        )}
         <Text ml='6px' fontSize='14px' fontWeight='500' lineHeight='21px' textAlign='left'>
           Add card
         </Text>
