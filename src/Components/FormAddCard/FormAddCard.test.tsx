@@ -27,4 +27,11 @@ describe('FormAddCard.tsx test', () => {
 
     expect(getByTestId('icon-add')).toBeInTheDocument();
   });
+
+  it('Should to be in FormAddCard the input and button', () => {
+    const { getByTestId } = render(<FormAddCard />);
+
+    expect(getByTestId('task-button')).toBeInTheDocument();
+    expect(getByTestId('task-input')).toBeInTheDocument();
+  });
 });

@@ -41,7 +41,14 @@ function FormAddCard() {
       </Box>
       <Collapse in={show}>
         <Flex pb='20px' flexDir='column'>
-          <InputGroup variant='none' size='md' placeholder='New task' w='278px' borderRadius='5px'>
+          <InputGroup
+            data-testid='task-input'
+            variant='none'
+            size='md'
+            placeholder='New task'
+            w='278px'
+            borderRadius='5px'
+          >
             <InputLeftElement
               pointerEvents='none'
               children={<Icon as={GiGooeyEyedSun} color={newTask == '' ? 'gray.400' : 'BLUE'} />}
@@ -62,7 +69,14 @@ function FormAddCard() {
               }}
             />
           </InputGroup>
-          <Button colorScheme='whiteAlpha' mt='15px' float='right' type='submit' size='md'>
+          <Button
+            data-testId='task-button'
+            colorScheme='whiteAlpha'
+            mt='15px'
+            float='right'
+            type='submit'
+            size='md'
+          >
             Add task
           </Button>
         </Flex>
