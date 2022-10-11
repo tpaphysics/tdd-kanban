@@ -1,29 +1,17 @@
-import { Box, Flex, Icon, Text, VStack } from '@chakra-ui/react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 import React from 'react';
-import EditableCard from '../EditableCard';
 import FormAddCard from '../FormAddCard';
 import KanbanListHeader from '../KanbanListHeader';
 import KanbanCardsContainer from '../KanbanCardsContainer';
+import KanbanListContainer from '../KanbanListContainer/KanbanListContainer';
+import { BoxProps } from '@chakra-ui/react';
 
-function KanbanList() {
-  const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
+function KanbanList({ ...props }: BoxProps) {
   return (
-    <Box
-      as={Flex}
-      w='315px'
-      bg={list.bgList}
-      alignItems='center'
-      p='7px 20px 0 20px'
-      borderRadius='5px'
-      flexDir='column'
-      borderTop='3px solid'
-      borderTopColor='RGBA2'
-    >
+    <KanbanListContainer {...props}>
       <KanbanListHeader />
       <KanbanCardsContainer />
       <FormAddCard />
-    </Box>
+    </KanbanListContainer>
   );
 }
 
