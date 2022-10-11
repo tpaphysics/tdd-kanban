@@ -16,6 +16,14 @@ describe('useFormAddCard hook test', () => {
     act(() => {
       result.current.handleToogle();
     });
+
     expect(result.current.show).toEqual(true);
+  });
+  it('should be empty ("") newTask default value', () => {
+    const { result } = renderHook(useFormAddCard);
+    act(() => {
+      result.current.newTask;
+    });
+    expect(result.current.newTask).toEqual('');
   });
 });
