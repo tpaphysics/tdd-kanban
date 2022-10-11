@@ -19,5 +19,5 @@ export const useEditableCard = () => {
     setTask(format);
   }, [task]);
 
-  return { task, inputRef, finished, handleClickTag, handleEditTask, handleOnBlur };
+  return { task, setTask, inputRef, finished, handleClickTag, handleEditTask, handleOnBlur };
 };

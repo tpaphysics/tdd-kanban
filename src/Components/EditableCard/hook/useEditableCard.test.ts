@@ -18,4 +18,18 @@ describe('useEditableCard hook test', () => {
     });
     expect(result.current.finished).toEqual(true);
   });
+  it('handleOnBlur, should contain when updated (...)', () => {
+    const { result } = renderHook(useEditableCard);
+    const mockedLargeTaskValue = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
+    act(() => {
+      result.current.setTask(mockedLargeTaskValue);
+    });
+
+    act(() => {
+      result.current.handleOnBlur();
+    });
+
+    expect(result.current.task.includes('...')).toEqual(true);
+  });
 });
