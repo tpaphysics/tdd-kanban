@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import EditableCard from './Components/EditableCard';
+import KanbanList from './Components/KanbanList';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       backgroundPosition='95% 80%'
       alignItems='center'
     >
-      <EditableCard />
+      <KanbanList />
     </Flex>
   );
 }
