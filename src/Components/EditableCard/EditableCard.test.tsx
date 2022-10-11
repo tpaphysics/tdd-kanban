@@ -16,4 +16,13 @@ describe('EditableCard.tsx test', () => {
     fireEvent.click(getByTestId('tag-1'));
     expect(getByText('Finished')).toBeInTheDocument();
   });
+
+  it('Should be possible edit the task', () => {
+    const { getByTestId, getByText } = render(<EditableCard />);
+    fireEvent.focus(getByTestId('editable-1'));
+    fireEvent.change(getByTestId('input-1'), { target: { value: 'editingTask' } });
+    fireEvent.blur(getByTestId('input-1'));
+
+    expect(getByText('editingTask')).toBeInTheDocument();
+  });
 });

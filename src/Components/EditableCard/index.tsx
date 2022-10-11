@@ -19,12 +19,13 @@ import {
 import { useEditableCard } from './hook/useEditableCard';
 
 function EditableCard() {
-  const card = { id: 1, task: 'Task', tag: 'sucess' };
+  const card = { id: 1, task: 'Task', tag: 'sucess', finished: false };
   const colorTag = 'BLUE';
 
-  const { finished, handleClickTag } = useEditableCard();
+  const { task, finished, handleClickTag, handleEditTask, handleOnBlur } = useEditableCard();
   return (
     <Box
+      data-testid={`card-${card.id}`}
       display='flex'
       flexDir='column'
       justifyContent='space-between'
@@ -37,20 +38,26 @@ function EditableCard() {
     >
       <Flex alignItems={'center'} justifyContent='space-between'>
         <Editable
-          defaultValue={card.task}
+          data-testid={`editable-${card.id}`}
+          value={task}
           fontWeight='500'
           fontSize='16px'
           lineHeight='21px'
           variant='none'
         >
           <EditablePreview cursor='pointer' />
+
           <Input
+            data-testid={`input-${card.id}`}
             fontWeight='500'
             fontSize='16px'
             lineHeight='21px'
             as={EditableInput}
             borderRadius='5px'
             focusBorderColor={colorTag}
+            onChange={handleEditTask}
+            onBlur={handleOnBlur}
+            value={task}
             px='2px'
             h='28px'
           />
