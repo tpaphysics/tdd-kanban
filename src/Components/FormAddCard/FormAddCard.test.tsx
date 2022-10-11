@@ -6,24 +6,24 @@ import { fireEvent, render } from '@testing-library/react';
 import FormAddCard from '.';
 
 describe('FormAddCard.tsx test', () => {
-  it('Should not to be in FormAddCard the icon (+) when click in Add Card text', () => {
-    const { getByTestId } = render(<FormAddCard />);
+  it('Should not to be in FormAddCard the icon (+) when click in (Add card) text', () => {
+    const { getByTestId, getByText } = render(<FormAddCard />);
 
-    fireEvent.click(getByTestId('icon-add'));
+    fireEvent.click(getByText(/add card/i));
     expect(() => getByTestId('icon-add')).toThrow();
   });
-  it('Should to be in FormAddCard the icon (-) when click in Add Card text', () => {
-    const { getByTestId } = render(<FormAddCard />);
+  it('Should to be in FormAddCard the icon (-) when click in (Add card) text', () => {
+    const { getByTestId, getByText } = render(<FormAddCard />);
 
-    fireEvent.click(getByTestId('icon-add'));
+    fireEvent.click(getByText(/add card/i));
     expect(getByTestId('icon-minus')).toBeInTheDocument();
   });
 
-  it('Should to be in FormAddCard the icon (+) when click in Add Card text two times', () => {
-    const { getByTestId } = render(<FormAddCard />);
+  it('Should to be in FormAddCard the icon (+) when click in (Add card) text two times', () => {
+    const { getByTestId, getByText } = render(<FormAddCard />);
 
-    fireEvent.click(getByTestId('icon-add'));
-    fireEvent.click(getByTestId('icon-minus'));
+    fireEvent.click(getByText(/add card/i));
+    fireEvent.click(getByText(/add card/i));
 
     expect(getByTestId('icon-add')).toBeInTheDocument();
   });
