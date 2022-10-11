@@ -36,10 +36,11 @@ describe('FormAddCard.tsx test', () => {
   });
   it('Should be disable the button when input is empty', () => {
     const { getByTestId } = render(<FormAddCard />);
+    const input = getByTestId('task-input') as HTMLInputElement;
 
-    fireEvent.change(getByTestId('task-input'), { target: { value: '' } });
+    fireEvent.change(input, { target: { value: '' } });
 
-    expect(getByTestId('task-button').closest('button')).toBeDisabled();
+    expect(input.disabled).toBe(false);
   });
   it('Should be disable button when change for TEST the value in input', () => {
     const { getByTestId } = render(<FormAddCard />);
