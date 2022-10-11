@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import React from 'react';
 import EditableCard from '../EditableCard';
 import FormAddCard from '../FormAddCard';
+import KanbanListHeader from '../KanbanListHeader/KanbanListHeader';
 
 function KanbanList() {
   const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
@@ -18,13 +19,7 @@ function KanbanList() {
       borderTop='3px solid'
       borderTopColor='RGBA2'
     >
-      <Flex alignItems='center' justifyContent='space-between' w='100%'>
-        <Text fontSize='16px' fontWeight='700' lineHeight='24.59px' color='WHITE'>
-          {list.title}
-        </Text>
-
-        <Icon as={AiFillCloseCircle} color='WHITE' cursor='pointer' />
-      </Flex>
+      <KanbanListHeader />
       <VStack mt='8px'>
         <EditableCard />
         <EditableCard />
