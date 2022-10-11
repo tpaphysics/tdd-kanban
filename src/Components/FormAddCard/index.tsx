@@ -58,17 +58,7 @@ function FormAddCard() {
               }}
             />
           </InputGroup>
-          <Button
-            disabled={newTask === '' ? true : false}
-            aria-label='add-task-button'
-            colorScheme='whiteAlpha'
-            mt='12px'
-            float='right'
-            type='submit'
-            w='100px'
-            size='sm'
-            ml='auto'
-          >
+          <Button colorScheme='whiteAlpha' mt='15px' float='right' type='submit' size='md'>
             Add task
           </Button>
         </Flex>
