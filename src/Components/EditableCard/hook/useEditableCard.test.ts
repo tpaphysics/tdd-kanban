@@ -32,4 +32,16 @@ describe('useEditableCard hook test', () => {
 
     expect(result.current.task.includes('...')).toEqual(true);
   });
+  it('handleClickTag, should be updateded finished value for (Edit task) when input to be empty', () => {
+    const { result } = renderHook(useEditableCard);
+
+    act(() => {
+      result.current.setTask('');
+    });
+
+    act(() => {
+      result.current.handleOnBlur();
+    });
+    expect(result.current.task).toEqual('Edit task');
+  });
 });

@@ -16,7 +16,7 @@ export const useEditableCard = () => {
 
   const handleOnBlur = useCallback(() => {
     const format = formatTask(task);
-    setTask(format);
+    format == '' ? setTask('Edit task') : setTask(format);
   }, [task]);
 
   return { task, setTask, inputRef, finished, handleClickTag, handleEditTask, handleOnBlur };
