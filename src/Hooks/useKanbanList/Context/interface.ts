@@ -1,3 +1,6 @@
+import { IList } from '../../../data/interfaces/IList';
+
 export interface IKanbanListContext {
-  value: true;
+  list: IList;
+  handlerAddCard: (task: string) => void;
 }
