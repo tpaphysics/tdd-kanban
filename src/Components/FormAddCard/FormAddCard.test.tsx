@@ -12,4 +12,10 @@ describe('FormAddCard.tsx test', () => {
     fireEvent.click(getByTestId('icon-add'));
     expect(() => getByTestId('icon-add')).toThrow();
   });
+  it('Should to be in FormAddCard the icon (-) when click in Add Card text', () => {
+    const { getByTestId } = render(<FormAddCard />);
+
+    fireEvent.click(getByTestId('icon-add'));
+    expect(getByTestId('icon-minus')).toBeInTheDocument();
+  });
 });
