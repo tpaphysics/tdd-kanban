@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
 import { describe, it } from 'vitest';
-import { act, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import FormAddCard from '.';
 
@@ -36,21 +36,21 @@ describe('FormAddCard.tsx test', () => {
   });
   it('Should be disable the button when input is empty', () => {
     const { getByTestId } = render(<FormAddCard />);
-    const input = getByTestId('task-input') as HTMLInputElement;
+    const input = getByTestId('task-input');
 
     fireEvent.change(input, { target: { value: '' } });
 
-    expect(input.disabled).toBe(false);
+    expect(input).toHaveProperty('disabled', false);
   });
   it('Should be disable button when change for TEST the value in input', () => {
     const { getByTestId } = render(<FormAddCard />);
 
-    const input = getByTestId('task-input') as HTMLInputElement;
-    const button = getByTestId('task-button') as HTMLButtonElement;
+    const input = getByTestId('task-input');
+    const button = getByTestId('task-button');
 
     fireEvent.change(input, { target: { value: 'TEST' } });
     getByTestId('task-button');
 
-    expect(button.disabled).toBe(false);
+    expect(button).toHaveProperty('disabled', false);
   });
 });
