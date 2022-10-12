@@ -23,7 +23,7 @@ function EditableCard({ card }: EditableCardsProps) {
   //const card = { id: 1, task: 'Task', tag: 'sucess', finished: false };
   //const list. = 'BLUE';
 
-  const { list, task, finished, handleClickTag, handleEditTask, handleOnBlur } =
+  const { list, task, finished, handleClickTag, handleEditTask, handleOnBlur, handleRemoveCard } =
     useEditableCard(card);
   return (
     <Box
@@ -66,7 +66,13 @@ function EditableCard({ card }: EditableCardsProps) {
           />
         </Editable>
 
-        <Icon as={BsTrashFill} color={list.bgList} cursor={'pointer'} />
+        <Icon
+          onClick={handleRemoveCard}
+          as={BsTrashFill}
+          color={list.bgList}
+          cursor={'pointer'}
+          data-testid={`trash-icon-${card.id}`}
+        />
       </Flex>
       <Flex alignItems='center' justifyContent='space-between'>
         <Text onClick={handleClickTag} cursor='pointer' data-testid={`tag-${card.id}`}>

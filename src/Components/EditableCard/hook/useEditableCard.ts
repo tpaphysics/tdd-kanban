@@ -4,7 +4,7 @@ import { useList } from '../../../Hooks/useList';
 import { formatTask } from './utils/utils';
 
 export const useEditableCard = (initialCard: ICard) => {
-  const { list } = useList();
+  const { list, removeCard } = useList();
 
   const [finished, setFinished] = useState(initialCard.finished);
   const [task, setTask] = useState(initialCard.task);
@@ -23,5 +23,19 @@ export const useEditableCard = (initialCard: ICard) => {
     format == '' ? setTask('Edit task') : setTask(format);
   }, [task]);
 
-  return { list, task, setTask, inputRef, finished, handleClickTag, handleEditTask, handleOnBlur };
+  const handleRemoveCard = useCallback(() => {
+    removeCard(initialCard.id);
+  }, [initialCard.id, removeCard]);
+
+  return {
+    list,
+    task,
+    setTask,
+    inputRef,
+    finished,
+    handleClickTag,
+    handleEditTask,
+    handleOnBlur,
+    handleRemoveCard,
+  };
 };
