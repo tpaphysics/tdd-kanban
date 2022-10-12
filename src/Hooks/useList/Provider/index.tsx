@@ -9,9 +9,9 @@ interface KanbanListProviderProps extends BoxProps {
 }
 
 function KanbanListProvider({ children, initialList }: KanbanListProviderProps) {
-  const { list, handleAddCard, handleRemoveCard } = useListProvider(initialList);
+  const { list, addCard, removeCard } = useListProvider(initialList);
   return (
-    <KanbanListContext.Provider value={{ list, handleAddCard, handleRemoveCard }}>
+    <KanbanListContext.Provider value={{ list, addCard, removeCard }}>
       {children}
     </KanbanListContext.Provider>
   );

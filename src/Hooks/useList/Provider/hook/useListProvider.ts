@@ -7,7 +7,7 @@ export const useListProvider = (initialList: IList) => {
   const [cards, setCards] = useState(initialList.cards);
   const list = { ...initialList, cards };
 
-  const handleAddCard = useCallback(
+  const addCard = useCallback(
     (newTask: string) => {
       const newCard = { id: uuid(), task: newTask, finished: false } as ICard;
       const updated = [...cards, newCard];
@@ -15,7 +15,7 @@ export const useListProvider = (initialList: IList) => {
     },
     [cards],
   );
-  const handleRemoveCard = useCallback(
+  const removeCard = useCallback(
     (cardId: string) => {
       const updated = cards.filter((card) => cardId != card.id);
       setCards(updated);
@@ -23,5 +23,5 @@ export const useListProvider = (initialList: IList) => {
     [cards],
   );
 
-  return { list, handleAddCard, handleRemoveCard };
+  return { list, addCard, removeCard };
 };
