@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
+import { useList } from '../../../Hooks/useList';
 
 export const useFormAddCard = () => {
+  const { addCard } = useList();
   const [show, setShow] = useState(false);
   const [newTask, setNewTask] = useState('');
 
@@ -13,9 +15,10 @@ export const useFormAddCard = () => {
   }, []);
 
   const handleClick = useCallback(() => {
+    addCard(newTask);
     setNewTask('');
     setShow(false);
-  }, []);
+  }, [addCard, newTask]);
 
   return { show, setShow, newTask, setNewTask, handleToogle, handleChange, handleClick };
 };
