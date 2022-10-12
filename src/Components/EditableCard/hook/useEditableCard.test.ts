@@ -3,14 +3,14 @@ import { describe, it } from 'vitest';
 import { useEditableCard } from './useEditableCard';
 
 describe('useEditableCard hook test', () => {
-  it('should be false finished default value', () => {
+  it('should be false the finished state by default', () => {
     const { result } = renderHook(useEditableCard);
     act(() => {
       result.current.finished;
     });
     expect(result.current.finished).toEqual(false);
   });
-  it('handleClickTag, should it updateded finished value for true', () => {
+  it('handleClickTag, should be updateded finished state for true', () => {
     const { result } = renderHook(useEditableCard);
 
     act(() => {
@@ -18,7 +18,7 @@ describe('useEditableCard hook test', () => {
     });
     expect(result.current.finished).toEqual(true);
   });
-  it('handleOnBlur, should contain when updated (...)', () => {
+  it('handleOnBlur, should contain (...) when make blur and when mockerLargeTaskValue for bigger than 25', () => {
     const { result } = renderHook(useEditableCard);
     const mockedLargeTaskValue = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
