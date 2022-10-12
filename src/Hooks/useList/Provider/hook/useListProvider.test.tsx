@@ -1,7 +1,7 @@
 import { BoxProps } from '@chakra-ui/react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import KanbanListProvider from '..';
-import { useKanbanList } from '../..';
+import { useList } from '../..';
 import { ICard } from '../../../../data/interfaces/ICard';
 import lists from '../../../../data/lists';
 
@@ -12,7 +12,7 @@ describe('useKanbanListProvider hook test', () => {
     const wrapper = ({ children }: BoxProps) => (
       <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
     );
-    const { result } = renderHook(() => useKanbanList(), { wrapper });
+    const { result } = renderHook(() => useList(), { wrapper });
 
     act(() => {
       result.current?.list;
@@ -25,7 +25,7 @@ describe('useKanbanListProvider hook test', () => {
     const wrapper = ({ children }: BoxProps) => (
       <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
     );
-    const { result } = renderHook(() => useKanbanList(), { wrapper });
+    const { result } = renderHook(() => useList(), { wrapper });
 
     act(() => {
       result.current?.handleAddCard('My task');
@@ -37,7 +37,7 @@ describe('useKanbanListProvider hook test', () => {
     const wrapper = ({ children }: BoxProps) => (
       <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
     );
-    const { result } = renderHook(() => useKanbanList(), { wrapper });
+    const { result } = renderHook(() => useList(), { wrapper });
 
     const mockedId = mockedList.cards[0].id;
     act(() => {

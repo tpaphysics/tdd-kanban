@@ -3,7 +3,7 @@ import { IList } from '../../../../data/interfaces/IList';
 import uuid from 'react-uuid';
 import { ICard } from '../../../../data/interfaces/ICard';
 
-export const useKanbanListProvider = (initialList: IList) => {
+export const useListProvider = (initialList: IList) => {
   const [cards, setCards] = useState(initialList.cards);
   const list = { ...initialList, cards };
 
