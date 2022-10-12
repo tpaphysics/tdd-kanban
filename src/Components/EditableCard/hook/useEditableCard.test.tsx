@@ -64,7 +64,7 @@ describe('useEditableCard hook test', () => {
     expect(result.current.task).toEqual('Edit task');
   });
 
-  it('handleRemoveCard, should be called of removeCard', () => {
+  it('handleRemoveCard, should be called the function removeCard', () => {
     const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
 
     act(() => {
