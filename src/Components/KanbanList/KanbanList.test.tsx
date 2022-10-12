@@ -17,7 +17,7 @@ describe('KanbanList.tsx test', () => {
 
     expect(getByText('r2d2')).toBeInTheDocument();
   });
-  it('Should be exclude the card task when click in trash icon', () => {
+  it('Should be exclude the task card when click in trash icon', () => {
     const { cards } = mockedList;
     const { getByTestId } = render(<KanbanList list={mockedList} />);
     const trashIcon = getByTestId(`trash-icon-${cards[0].id}`);
