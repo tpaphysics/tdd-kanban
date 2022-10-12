@@ -1,10 +1,29 @@
+import { BoxProps } from '@chakra-ui/react';
 import { act, renderHook } from '@testing-library/react';
 import React from 'react';
-import { describe, it } from 'vitest';
+import { describe, it, vi } from 'vitest';
+import lists from '../../../data/lists';
+import * as useList from '../../../Hooks/useList';
+import KanbanListProvider from '../../../Hooks/useList/Provider';
 import { useFormAddCard } from './useFormAddCard';
 
 describe('useFormAddCard hook test', () => {
+  const mockedList = lists[0];
+
+  const wrapper = ({ children }: BoxProps) => (
+    <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+  );
+
+  const mockedUseList = vi
+    .spyOn(useList, 'useList')
+    .mockImplementation(() => ({ AddCard: vi.fn() } as any));
+
+  beforeAll(() => {
+    vi.restoreAllMocks();
+  });
+
   it('should be false show default value', () => {
+    useList;
     const { result } = renderHook(useFormAddCard);
     act(() => {
       result.current.show;
@@ -38,7 +57,7 @@ describe('useFormAddCard hook test', () => {
     expect(result.current.newTask).toEqual('TEST');
   });
   it('handleClick, should be updateded the newTask value for empty', () => {
-    const { result } = renderHook(useFormAddCard);
+    const { result } = renderHook(() => useFormAddCard(), { wrapper });
 
     act(() => {
       result.current.setNewTask('TASK');
@@ -47,11 +66,11 @@ describe('useFormAddCard hook test', () => {
     act(() => {
       result.current.handleClick();
     });
-
+    expect(mockedUseList).toBeCalled();
     expect(result.current.newTask).toEqual('');
   });
   it('handleClick, should be updateded the show value for false', () => {
-    const { result } = renderHook(useFormAddCard);
+    const { result } = renderHook(() => useFormAddCard(), { wrapper });
 
     act(() => {
       result.current.setShow(true);
@@ -60,7 +79,7 @@ describe('useFormAddCard hook test', () => {
     act(() => {
       result.current.handleClick();
     });
-
+    expect(mockedUseList).toBeCalled();
     expect(result.current.show).toEqual(false);
   });
 });
