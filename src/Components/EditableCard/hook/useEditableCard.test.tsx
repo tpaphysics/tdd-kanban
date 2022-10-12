@@ -15,6 +15,9 @@ describe('useEditableCard hook test', () => {
     .mockImplementation(
       () => ({ list: mockedList, AddCard: vi.fn(), removedCard: vi.fn() } as any),
     );
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
   const wrapper = ({ children }: BoxProps) => (
     <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
   );
@@ -59,5 +62,14 @@ describe('useEditableCard hook test', () => {
       result.current.handleOnBlur();
     });
     expect(result.current.task).toEqual('Edit task');
+  });
+
+  it('handleRemoveCard, should be called of removeCard', () => {
+    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
+
+    act(() => {
+      result.current.handleRemoveCard();
+    });
+    expect(mockedUseList).toBeCalled();
   });
 });
