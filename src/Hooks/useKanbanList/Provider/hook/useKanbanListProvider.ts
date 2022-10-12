@@ -7,7 +7,7 @@ export const useKanbanListProvider = (initialList: IList) => {
   const [cards, setCards] = useState(initialList.cards);
   const list = { ...initialList, cards };
 
-  const handlerAddCard = useCallback(
+  const handleAddCard = useCallback(
     (newTask: string) => {
       const newCard = { id: uuid(), task: newTask, finished: false } as ICard;
       const updated = [...cards, newCard];
@@ -15,6 +15,13 @@ export const useKanbanListProvider = (initialList: IList) => {
     },
     [cards],
   );
+  const handleRemoveCard = useCallback(
+    (cardId: string) => {
+      const updated = cards.filter((card) => cardId != card.id);
+      setCards(updated);
+    },
+    [cards],
+  );
 
-  return { list, handlerAddCard };
+  return { list, handleAddCard, handleRemoveCard };
 };

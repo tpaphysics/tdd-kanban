@@ -2,5 +2,6 @@ import { IList } from '../../../data/interfaces/IList';
 
 export interface IKanbanListContext {
   list: IList;
-  handlerAddCard: (task: string) => void;
+  handleAddCard: (task: string) => void;
+  handleRemoveCard: (cardId: string) => void;
 }

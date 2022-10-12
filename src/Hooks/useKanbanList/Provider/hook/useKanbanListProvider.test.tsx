@@ -28,9 +28,23 @@ describe('useKanbanListProvider hook test', () => {
     const { result } = renderHook(() => useKanbanList(), { wrapper });
 
     act(() => {
-      result.current?.handlerAddCard('My task');
+      result.current?.handleAddCard('My task');
     });
     const response = result.current?.list.cards.filter((card) => card.task === 'My task');
     expect(response?.length).toBe(1);
+  });
+  it('handleRemoveCard, Should remove card the list of cards', () => {
+    const wrapper = ({ children }: BoxProps) => (
+      <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+    );
+    const { result } = renderHook(() => useKanbanList(), { wrapper });
+
+    const mockedId = mockedList.cards[0].id;
+    act(() => {
+      result.current?.handleRemoveCard(mockedId);
+    });
+
+    const response = result.current?.list.cards.filter((card) => card.id === mockedId);
+    expect(response?.length).toBe(0);
   });
 });
