@@ -17,7 +17,7 @@ import React from 'react';
 import { useFormAddCard } from './hook/useFormAddCard';
 
 function FormAddCard() {
-  const { show, handleToogle, newTask, handleChange, handleClick } = useFormAddCard();
+  const { list, show, handleToogle, newTask, handleChange, handleClick } = useFormAddCard();
   return (
     <>
       <Box
@@ -48,7 +48,7 @@ function FormAddCard() {
                 <Icon
                   data-testid='input-icon'
                   as={GiGooeyEyedSun}
-                  color={newTask == '' ? 'gray.400' : 'BLUE'}
+                  color={newTask == '' ? 'gray.400' : list.bgList}
                 />
               }
             />

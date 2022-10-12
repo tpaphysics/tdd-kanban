@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, HStack, VStack } from '@chakra-ui/react';
 import KanbanList from './Components/KanbanList';
 import lists from './data/lists';
 
@@ -14,7 +14,11 @@ function App() {
       backgroundPosition='95% 80%'
       alignItems='center'
     >
-      <KanbanList list={lists[0]} />
+      <VStack alignItems='baseline' flexWrap='wrap'>
+        {lists.map((list) => (
+          <KanbanList list={list} key={list.id} />
+        ))}
+      </VStack>
     </Flex>
   );
 }
