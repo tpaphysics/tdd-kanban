@@ -1,3 +1,3 @@
-export interface EditableCardProps {
-  prop: any;
+export interface EditableCardsProps {
+  card: ICard;
 }

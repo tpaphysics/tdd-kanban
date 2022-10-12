@@ -1,10 +1,12 @@
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { useList } from '../../Hooks/useList';
 
-const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
+//const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
 
 function KanbanListHeader() {
+  const { list } = useList();
   return (
     <Flex alignItems='center' justifyContent='space-between' w='100%'>
       <Text fontSize='16px' fontWeight='700' lineHeight='24.59px' color='WHITE'>

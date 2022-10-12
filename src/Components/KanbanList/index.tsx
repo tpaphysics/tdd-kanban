@@ -3,15 +3,18 @@ import FormAddCard from '../FormAddCard';
 import KanbanListHeader from '../KanbanListHeader';
 import KanbanCardsContainer from '../KanbanCardsContainer';
 import KanbanListContainer from '../KanbanListContainer/KanbanListContainer';
-import { BoxProps } from '@chakra-ui/react';
+import KanbanListProvider from '../../Hooks/useList/Provider';
+import { KanbanListProps } from './interface';
 
-function KanbanList({ ...props }: BoxProps) {
+function KanbanList({ list, ...props }: KanbanListProps) {
   return (
-    <KanbanListContainer {...props}>
-      <KanbanListHeader />
-      <KanbanCardsContainer />
-      <FormAddCard />
-    </KanbanListContainer>
+    <KanbanListProvider initialList={list}>
+      <KanbanListContainer {...props}>
+        <KanbanListHeader />
+        <KanbanCardsContainer />
+        <FormAddCard />
+      </KanbanListContainer>
+    </KanbanListProvider>
   );
 }
 

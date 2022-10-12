@@ -1,9 +1,11 @@
 import { BoxProps, Box, Flex } from '@chakra-ui/react';
 import React from 'react';
+import { useList } from '../../Hooks/useList';
 
-const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
+//const list = { id: '11', title: '📝  To Do', bgList: 'BLUE', tag: 'top', cards: [] };
 
 function KanbanListContainer({ children, ...props }: BoxProps) {
+  const { list } = useList();
   return (
     <Box
       {...props}

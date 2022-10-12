@@ -17,12 +17,14 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useEditableCard } from './hook/useEditableCard';
+import { EditableCardsProps } from './interface';
 
-function EditableCard() {
-  const card = { id: 1, task: 'Task', tag: 'sucess', finished: false };
-  const colorTag = 'BLUE';
+function EditableCard({ card }: EditableCardsProps) {
+  //const card = { id: 1, task: 'Task', tag: 'sucess', finished: false };
+  //const list. = 'BLUE';
 
-  const { task, finished, handleClickTag, handleEditTask, handleOnBlur } = useEditableCard();
+  const { list, task, finished, handleClickTag, handleEditTask, handleOnBlur } =
+    useEditableCard(card);
   return (
     <Box
       data-testid={`card-${card.id}`}
@@ -54,7 +56,7 @@ function EditableCard() {
             lineHeight='21px'
             as={EditableInput}
             borderRadius='5px'
-            focusBorderColor={colorTag}
+            focusBorderColor={list.bgList}
             onChange={handleEditTask}
             onBlur={handleOnBlur}
             onKeyDown={handleOnBlur}
@@ -64,20 +66,20 @@ function EditableCard() {
           />
         </Editable>
 
-        <Icon as={BsTrashFill} color={colorTag} cursor={'pointer'} />
+        <Icon as={BsTrashFill} color={list.bgList} cursor={'pointer'} />
       </Flex>
       <Flex alignItems='center' justifyContent='space-between'>
         <Text onClick={handleClickTag} cursor='pointer' data-testid={`tag-${card.id}`}>
           <Tag
             size={'sm'}
             variant='solid'
-            bg={colorTag}
+            bg={list.bgList}
             fontStyle='italic'
             _hover={{ opacity: '0.8', transitionDuration: '0.3s' }}
           >
             <TagLeftIcon as={finished ? GiSupersonicArrow : GiRapidshareArrow} />
             <TagLabel fontWeight='700' fontSize='12px' color='WHITE'>
-              {card.tag}
+              {list.tag}
             </TagLabel>
           </Tag>
         </Text>

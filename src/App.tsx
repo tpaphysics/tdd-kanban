@@ -1,5 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import KanbanList from './Components/KanbanList';
+import lists from './data/lists';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       backgroundPosition='95% 80%'
       alignItems='center'
     >
-      <KanbanList />
+      <KanbanList list={lists[0]} />
     </Flex>
   );
 }

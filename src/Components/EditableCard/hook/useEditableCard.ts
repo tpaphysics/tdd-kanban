@@ -1,9 +1,13 @@
 import React, { useCallback, useRef, useState } from 'react';
+import { ICard } from '../../../data/interfaces/ICard';
+import { useList } from '../../../Hooks/useList';
 import { formatTask } from './utils/utils';
 
-export const useEditableCard = () => {
-  const [finished, setFinished] = useState(false);
-  const [task, setTask] = useState('Task');
+export const useEditableCard = (initialCard: ICard) => {
+  const { list } = useList();
+
+  const [finished, setFinished] = useState(initialCard.finished);
+  const [task, setTask] = useState(initialCard.task);
   const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
 
   const handleClickTag = useCallback(() => {
@@ -19,5 +23,5 @@ export const useEditableCard = () => {
     format == '' ? setTask('Edit task') : setTask(format);
   }, [task]);
 
-  return { task, setTask, inputRef, finished, handleClickTag, handleEditTask, handleOnBlur };
+  return { list, task, setTask, inputRef, finished, handleClickTag, handleEditTask, handleOnBlur };
 };
