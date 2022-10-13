@@ -23,11 +23,13 @@ import { useRef, useState } from 'react';
 import { BsCardChecklist } from 'react-icons/bs';
 import { GiGooeyEyedSun } from 'react-icons/gi';
 import { MdAddChart, MdLabelOutline } from 'react-icons/md';
+import { TbLamp2 } from 'react-icons/tb';
 import colors from '../../data/colors';
 
 function FormAddList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [newListName, setNewListName] = useState('');
+  const [listColor, setListColor] = useState('BLACK');
 
   const [tagName, setTagName] = useState('');
 
@@ -104,10 +106,20 @@ function FormAddList() {
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Color</FormLabel>
+              <FormLabel fontStyle='italic'>
+                Color&nbsp;&nbsp;
+                <Icon as={TbLamp2} w='18px' h='18px' cursor='pointer' color={listColor} />
+              </FormLabel>
               <HStack>
                 {colors.map((color) => (
-                  <Circle size='28px' bg={color} color='white' key={color}>
+                  <Circle
+                    padding='2px'
+                    size='28px'
+                    bg={color}
+                    color='white'
+                    key={color}
+                    onClick={() => setListColor(color)}
+                  >
                     <Icon as={GiGooeyEyedSun} w='12px' h='12px' cursor='pointer' />
                   </Circle>
                 ))}

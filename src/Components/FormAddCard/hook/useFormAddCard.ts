@@ -20,5 +20,14 @@ export const useFormAddCard = () => {
     setShow(false);
   }, [addCard, newTask]);
 
-  return { list, show, setShow, newTask, setNewTask, handleToogle, handleChange, handleClick };
+  return {
+    list,
+    show,
+    setShow,
+    newTask,
+    setNewTask,
+    handleToogle,
+    handleChange,
+    handleClick,
+  };
 };

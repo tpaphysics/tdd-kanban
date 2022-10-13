@@ -18,6 +18,7 @@ import { useFormAddCard } from './hook/useFormAddCard';
 
 function FormAddCard() {
   const { list, show, handleToogle, newTask, handleChange, handleClick } = useFormAddCard();
+
   return (
     <>
       <Box
@@ -59,8 +60,9 @@ function FormAddCard() {
               placeholder='Write a new task'
             />
           </InputGroup>
+
           <Button
-            disabled={newTask == '' ? true : false}
+            //disabled={newTask == '' ? true : false}
             data-testid='task-button'
             colorScheme='whiteAlpha'
             mt='15px'

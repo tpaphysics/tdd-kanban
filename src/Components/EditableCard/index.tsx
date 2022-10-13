@@ -1,20 +1,25 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { BsTrashFill } from 'react-icons/bs';
 import { GiRapidshareArrow, GiSupersonicArrow } from 'react-icons/gi';
 import { BsCheckCircle } from 'react-icons/bs';
+import { CheckIcon, EditIcon, CloseIcon } from '@chakra-ui/icons';
 
 import {
   Box,
+  ButtonGroup,
   Editable,
   EditableInput,
   EditablePreview,
   Flex,
   Icon,
+  IconButton,
   Input,
   Tag,
   TagLabel,
   TagLeftIcon,
   Text,
+  useEditableControls,
 } from '@chakra-ui/react';
 import { useEditableCard } from './hook/useEditableCard';
 import { EditableCardsProps } from './interface';
@@ -25,6 +30,60 @@ function EditableCard({ card }: EditableCardsProps) {
 
   const { list, task, finished, handleClickTag, handleEditTask, handleOnBlur, handleRemoveCard } =
     useEditableCard(card);
+
+  function EditableControls() {
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } =
+      useEditableControls();
+
+    return isEditing ? (
+      <ButtonGroup justifyContent='baseline' size='sm' mr='auto' alignItems='center' ml='20px'>
+        <IconButton
+          color={list.bgList}
+          colorScheme='gray'
+          size='xs'
+          icon={<CheckIcon />}
+          {...(getSubmitButtonProps() as any)}
+        />
+        <IconButton
+          color={list.bgList}
+          colorScheme='gray'
+          size='xs'
+          icon={<CloseIcon />}
+          {...(getCancelButtonProps() as any)}
+        />
+        <IconButton
+          onClick={handleRemoveCard}
+          color={list.bgList}
+          colorScheme='gray'
+          size='xs'
+          icon={<BsTrashFill />}
+          // eslint-disable-next-line react/prop-types
+          data-testid={`trash-icon-${card.id}`}
+          {...(getCancelButtonProps() as any)}
+        />
+      </ButtonGroup>
+    ) : (
+      <ButtonGroup justifyContent='baseline' size='sm' mr='auto' alignItems='center'>
+        <IconButton
+          color={list.bgList}
+          colorScheme='gray'
+          size='xs'
+          icon={<EditIcon />}
+          {...(getEditButtonProps() as any)}
+        />
+        <IconButton
+          onClick={handleRemoveCard}
+          color={list.bgList}
+          colorScheme='gray'
+          size='xs'
+          icon={<BsTrashFill />}
+          data-testid={`trash-icon-${card.id}`}
+          {...(getCancelButtonProps() as any)}
+        />
+      </ButtonGroup>
+    );
+  }
+
   return (
     <Box
       data-testid={`card-${card.id}`}
@@ -46,40 +105,37 @@ function EditableCard({ card }: EditableCardsProps) {
           fontSize='16px'
           lineHeight='21px'
           variant='none'
+          w='100%'
         >
-          <EditablePreview
-            cursor='pointer'
-            fontFamily='Pacifico'
-            fontSize='18px'
-            fontStyle='revert-layer'
-            fontWeight='400'
-            color='blackAlpha.700'
-          />
+          <Flex>
+            <EditablePreview
+              cursor='pointer'
+              fontFamily='Pacifico'
+              fontSize='18px'
+              fontStyle='revert-layer'
+              fontWeight='400'
+              color='blackAlpha.700'
+              w='100%'
+            />
 
-          <Input
-            data-testid={`input-${card.id}`}
-            fontWeight='500'
-            fontSize='16px'
-            lineHeight='21px'
-            as={EditableInput}
-            borderRadius='5px'
-            focusBorderColor={list.bgList}
-            onChange={handleEditTask}
-            onBlur={handleOnBlur}
-            onKeyDown={handleOnBlur}
-            value={task}
-            px='2px'
-            h='28px'
-          />
+            <Input
+              data-testid={`input-${card.id}`}
+              fontWeight='500'
+              fontSize='16px'
+              lineHeight='21px'
+              as={EditableInput}
+              borderRadius='5px'
+              focusBorderColor={list.bgList}
+              onChange={handleEditTask}
+              onBlur={handleOnBlur}
+              onKeyDown={handleOnBlur}
+              value={task}
+              px='2px'
+              h='28px'
+            />
+            <EditableControls />
+          </Flex>
         </Editable>
-
-        <Icon
-          onClick={handleRemoveCard}
-          as={BsTrashFill}
-          color={list.bgList}
-          cursor={'pointer'}
-          data-testid={`trash-icon-${card.id}`}
-        />
       </Flex>
       <Flex alignItems='center' justifyContent='space-between'>
         <Text onClick={handleClickTag} cursor='pointer' data-testid={`tag-${card.id}`}>
