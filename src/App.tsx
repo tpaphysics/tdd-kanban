@@ -4,6 +4,7 @@ import columns from './data/columns';
 import { MdAddChart } from 'react-icons/md';
 import lists from './data/lists';
 import images from './data/images';
+import KanbanColumn from './Components/KanbanColumn/KanbanColumn';
 
 function App() {
   return (
@@ -39,21 +40,7 @@ function App() {
       </Flex>
       <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto'>
         {columns.map((column) => (
-          <VStack bg='blackAlpha.200' px='2' key={column.id} py='2' borderRadius='5px'>
-            <Box as={Flex} w='100%' py='4px' alignItems='center' borderRadius='5px' h='26px'>
-              <Icon
-                as={MdAddChart}
-                color='blackAlpha.400'
-                w='24px'
-                h='24px'
-                ml='auto'
-                cursor='pointer'
-              />
-            </Box>
-            {column.lists.map((list) => (
-              <KanbanList list={list} key={list.id} />
-            ))}
-          </VStack>
+          <KanbanColumn initialColumn={column} key={column.id} />
         ))}
       </HStack>
     </Flex>
