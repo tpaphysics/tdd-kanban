@@ -4,7 +4,7 @@ import columns from './data/columns';
 import { MdAddChart } from 'react-icons/md';
 import lists from './data/lists';
 import images from './data/images';
-import KanbanColumn from './Components/KanbanColumn/KanbanColumn';
+import KanbanColumn from './Components/KanbanColumn';
 
 function App() {
   return (
