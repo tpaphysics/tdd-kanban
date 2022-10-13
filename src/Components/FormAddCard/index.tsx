@@ -57,16 +57,6 @@ function FormAddCard() {
               onChange={handleChange}
               value={newTask}
               placeholder='Write a new task'
-              fontSize='14px'
-              fontWeight='500'
-              lineHeight='21px'
-              textAlign='left'
-              _placeholder={{
-                fontSize: '14px',
-                fontWeight: '400',
-                lineHeight: '21px',
-                color: 'gray.400',
-              }}
             />
           </InputGroup>
           <Button
