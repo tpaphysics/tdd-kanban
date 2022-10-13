@@ -1,6 +1,4 @@
-import { VStack, Flex, Icon, Box } from '@chakra-ui/react';
 import React from 'react';
-import { MdAddChart } from 'react-icons/md';
 import { IColumn } from '../../data/interfaces/IColumn';
 import KanbanColumnContainer from '../KanbanColumnContainer/KanbanColumnContainer';
 import KanbanColumnHeader from '../KanbanColumnHeader/KanbanColumnHeader';
