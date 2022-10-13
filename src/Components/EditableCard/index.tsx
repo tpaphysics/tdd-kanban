@@ -47,7 +47,14 @@ function EditableCard({ card }: EditableCardsProps) {
           lineHeight='21px'
           variant='none'
         >
-          <EditablePreview cursor='pointer' />
+          <EditablePreview
+            cursor='pointer'
+            fontFamily='Pacifico'
+            fontSize='18px'
+            fontStyle='revert-layer'
+            fontWeight='400'
+            color='blackAlpha.700'
+          />
 
           <Input
             data-testid={`input-${card.id}`}
