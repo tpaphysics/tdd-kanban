@@ -26,8 +26,15 @@ function EditableCard({ card }: EditableCardsProps) {
   //const card = { id: 1, task: 'Task', tag: 'sucess', finished: false };
   //const list. = 'BLUE';
 
-  const { list, task, finished, handleClickTag, handleEditTask, handleOnBlur, handleRemoveCard } =
-    useEditableCard(card);
+  const {
+    list,
+    task,
+    finished,
+    handleClickTag,
+    handleEditTask,
+    handleClickCheck,
+    handleRemoveCard,
+  } = useEditableCard(card);
 
   return (
     <Box
@@ -62,6 +69,7 @@ function EditableCard({ card }: EditableCardsProps) {
               fontWeight='400'
               color='blackAlpha.700'
               w='100%'
+              defaultValue={'oiuoiuoiuo'}
             />
 
             <Input
@@ -77,7 +85,11 @@ function EditableCard({ card }: EditableCardsProps) {
               px='2px'
               h='28px'
             />
-            <EditableControls card={card} handleRemoveCard={handleRemoveCard} />
+            <EditableControls
+              card={card}
+              handleRemoveCard={handleRemoveCard}
+              handleClickCheck={handleClickCheck}
+            />
           </Flex>
         </Editable>
       </Flex>

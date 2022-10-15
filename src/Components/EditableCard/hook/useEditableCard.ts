@@ -18,7 +18,7 @@ export const useEditableCard = (initialCard: ICard) => {
     setTask(event.target.value);
   }, []);
 
-  const handleOnBlur = useCallback(() => {
+  const handleClickCheck = useCallback(() => {
     const format = formatTask(task);
     format == '' ? setTask('Edit task') : setTask(format);
   }, [task]);
@@ -35,7 +35,7 @@ export const useEditableCard = (initialCard: ICard) => {
     finished,
     handleClickTag,
     handleEditTask,
-    handleOnBlur,
+    handleClickCheck,
     handleRemoveCard,
   };
 };

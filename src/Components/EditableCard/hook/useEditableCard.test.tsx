@@ -37,7 +37,7 @@ describe('useEditableCard hook test', () => {
     });
     expect(result.current.finished).toEqual(false);
   });
-  it('handleOnBlur, should contain (...) when make blur and when mockerLargeTaskValue for bigger than 25', () => {
+  it('handleClickCheck, should contain (...) when make blur and when mockerLargeTaskValue for bigger than 25', () => {
     const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
     const mockedLargeTaskValue = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
@@ -46,7 +46,7 @@ describe('useEditableCard hook test', () => {
     });
 
     act(() => {
-      result.current.handleOnBlur();
+      result.current.handleClickCheck();
     });
 
     expect(result.current.task.includes('...')).toEqual(true);
@@ -59,7 +59,7 @@ describe('useEditableCard hook test', () => {
     });
 
     act(() => {
-      result.current.handleOnBlur();
+      result.current.handleClickCheck();
     });
     expect(result.current.task).toEqual('Edit task');
   });

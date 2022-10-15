@@ -54,9 +54,9 @@ describe('EditableCard.tsx test', () => {
         <EditableCardTest />
       </KanbanListProvider>,
     );
-    fireEvent.focus(getByTestId(`editable-${mockedCard.id}`));
+    fireEvent.click(getByTestId(`edit-icon-${mockedCard.id}`));
     fireEvent.change(getByTestId(`input-${mockedCard.id}`), { target: { value: '' } });
-    fireEvent.keyDown(getByTestId(`input-${mockedCard.id}`));
+    fireEvent.click(getByTestId(`check-edit-icon-${mockedCard.id}`));
 
     expect(getByText('Edit task')).toBeInTheDocument();
   });
