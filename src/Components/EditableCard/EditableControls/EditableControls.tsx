@@ -4,8 +4,9 @@ import { CheckIcon, EditIcon, CloseIcon } from '@chakra-ui/icons';
 import React from 'react';
 import { BsTrashFill } from 'react-icons/bs';
 import { useList } from '../../../Hooks/useList';
+import { EditableControlsProps } from './interface';
 
-function EditableControls() {
+function EditableControls({ card, handleRemoveCard }: EditableControlsProps) {
   const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } =
     useEditableControls();
 
@@ -18,6 +19,7 @@ function EditableControls() {
         colorScheme='gray'
         size='xs'
         icon={<CheckIcon />}
+        data-testid={`check-edit-icon-${card.id}`}
         {...(getSubmitButtonProps() as any)}
       />
       <IconButton
@@ -25,22 +27,14 @@ function EditableControls() {
         colorScheme='gray'
         size='xs'
         icon={<CloseIcon />}
-        {...(getCancelButtonProps() as any)}
-      />
-      <IconButton
-        //onClick={handleRemoveCard}
-        color={list.bgList}
-        colorScheme='gray'
-        size='xs'
-        icon={<BsTrashFill />}
-        // eslint-disable-next-line react/prop-types
-        data-testid={`trash-icon}`}
+        data-testid={`close-edit-icon-${card.id}`}
         {...(getCancelButtonProps() as any)}
       />
     </ButtonGroup>
   ) : (
     <ButtonGroup justifyContent='baseline' size='sm' mr='auto' alignItems='center'>
       <IconButton
+        data-testid={`edit-icon-${card.id}`}
         color={list.bgList}
         colorScheme='gray'
         size='xs'
@@ -53,8 +47,9 @@ function EditableControls() {
         colorScheme='gray'
         size='xs'
         icon={<BsTrashFill />}
-        data-testid={`trash-icon}`}
+        data-testid={`trash-icon-${card.id}`}
         {...(getCancelButtonProps() as any)}
+        onClick={handleRemoveCard}
       />
     </ButtonGroup>
   );

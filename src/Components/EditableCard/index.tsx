@@ -73,13 +73,11 @@ function EditableCard({ card }: EditableCardsProps) {
               borderRadius='5px'
               focusBorderColor={list.bgList}
               onChange={handleEditTask}
-              onBlur={handleOnBlur}
-              onKeyDown={handleOnBlur}
               value={task}
               px='2px'
               h='28px'
             />
-            <EditableControls />
+            <EditableControls card={card} handleRemoveCard={handleRemoveCard} />
           </Flex>
         </Editable>
       </Flex>
