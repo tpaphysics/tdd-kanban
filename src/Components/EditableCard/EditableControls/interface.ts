@@ -4,4 +4,5 @@ export interface EditableControlsProps {
   card: ICard;
   handleRemoveCard: () => void;
   handleClickCheck: () => void;
+  handleClickCloseEdit: () => void;
 }

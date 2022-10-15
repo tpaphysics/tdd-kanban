@@ -7,6 +7,7 @@ export const useEditableCard = (initialCard: ICard) => {
   const { list, removeCard } = useList();
 
   const [finished, setFinished] = useState(initialCard.finished);
+  const [preTask, setPreTask] = useState(initialCard.task);
   const [task, setTask] = useState(initialCard.task);
   const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
 
@@ -15,12 +16,24 @@ export const useEditableCard = (initialCard: ICard) => {
   }, [finished]);
 
   const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setTask(event.target.value);
+    setPreTask(event.target.value);
   }, []);
 
   const handleClickCheck = useCallback(() => {
-    const format = formatTask(task);
-    format == '' ? setTask('Edit task') : setTask(format);
+    const format = formatTask(preTask);
+    if (format == '') {
+      setTask('Edit task');
+      setPreTask('Edit task');
+    } else {
+      setTask(format);
+      setPreTask(format);
+    }
+
+    console.log(`p=${preTask}--${task}`);
+  }, [preTask, task]);
+
+  const handleClickCloseEdit = useCallback(() => {
+    setPreTask(task);
   }, [task]);
 
   const handleRemoveCard = useCallback(() => {
@@ -29,7 +42,9 @@ export const useEditableCard = (initialCard: ICard) => {
 
   return {
     list,
+    preTask,
     task,
+    setPreTask,
     setTask,
     inputRef,
     finished,
@@ -37,5 +52,6 @@ export const useEditableCard = (initialCard: ICard) => {
     handleEditTask,
     handleClickCheck,
     handleRemoveCard,
+    handleClickCloseEdit,
   };
 };

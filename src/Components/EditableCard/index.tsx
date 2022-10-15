@@ -28,11 +28,13 @@ function EditableCard({ card }: EditableCardsProps) {
 
   const {
     list,
+    preTask,
     task,
     finished,
     handleClickTag,
     handleEditTask,
     handleClickCheck,
+    handleClickCloseEdit,
     handleRemoveCard,
   } = useEditableCard(card);
 
@@ -52,7 +54,7 @@ function EditableCard({ card }: EditableCardsProps) {
       <Flex alignItems={'center'} justifyContent='space-between'>
         <Editable
           data-testid={`editable-${card.id}`}
-          value={task}
+          value={preTask}
           fontWeight='500'
           fontSize='16px'
           lineHeight='21px'
@@ -69,7 +71,6 @@ function EditableCard({ card }: EditableCardsProps) {
               fontWeight='400'
               color='blackAlpha.700'
               w='100%'
-              defaultValue={'oiuoiuoiuo'}
             />
 
             <Input
@@ -81,7 +82,7 @@ function EditableCard({ card }: EditableCardsProps) {
               borderRadius='5px'
               focusBorderColor={list.bgList}
               onChange={handleEditTask}
-              value={task}
+              value={preTask}
               px='2px'
               h='28px'
             />
@@ -89,6 +90,7 @@ function EditableCard({ card }: EditableCardsProps) {
               card={card}
               handleRemoveCard={handleRemoveCard}
               handleClickCheck={handleClickCheck}
+              handleClickCloseEdit={handleClickCloseEdit}
             />
           </Flex>
         </Editable>

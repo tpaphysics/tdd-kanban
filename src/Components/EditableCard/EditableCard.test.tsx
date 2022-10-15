@@ -60,4 +60,16 @@ describe('EditableCard.tsx test', () => {
 
     expect(getByText('Edit task')).toBeInTheDocument();
   });
+  it('Should not be edited the card when click on (x) button', () => {
+    const { getByTestId, getByText, debug } = render(
+      <KanbanListProvider initialList={mockedList}>
+        <EditableCardTest />
+      </KanbanListProvider>,
+    );
+    fireEvent.click(getByTestId(`edit-icon-${mockedCard.id}`));
+    fireEvent.change(getByTestId(`input-${mockedCard.id}`), { target: { value: 'Click' } });
+    fireEvent.click(getByTestId(`close-edit-icon-${mockedCard.id}`));
+    debug();
+    expect(() => getByText('Click')).toThrow();
+  });
 });

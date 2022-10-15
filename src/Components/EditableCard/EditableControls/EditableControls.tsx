@@ -6,7 +6,12 @@ import { BsTrashFill } from 'react-icons/bs';
 import { useList } from '../../../Hooks/useList';
 import { EditableControlsProps } from './interface';
 
-function EditableControls({ card, handleRemoveCard, handleClickCheck }: EditableControlsProps) {
+function EditableControls({
+  card,
+  handleRemoveCard,
+  handleClickCheck,
+  handleClickCloseEdit,
+}: EditableControlsProps) {
   const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } =
     useEditableControls();
 
@@ -16,6 +21,7 @@ function EditableControls({ card, handleRemoveCard, handleClickCheck }: Editable
     <ButtonGroup justifyContent='baseline' size='sm' mr='auto' alignItems='center' ml='20px'>
       <Box onClick={handleClickCheck}>
         <IconButton
+          onClick
           color={list.bgList}
           colorScheme='gray'
           size='xs'
@@ -24,14 +30,16 @@ function EditableControls({ card, handleRemoveCard, handleClickCheck }: Editable
           {...(getSubmitButtonProps() as any)}
         />
       </Box>
-      <IconButton
-        color={list.bgList}
-        colorScheme='gray'
-        size='xs'
-        icon={<CloseIcon />}
-        data-testid={`close-edit-icon-${card.id}`}
-        {...(getCancelButtonProps() as any)}
-      />
+      <Box onClick={handleClickCloseEdit}>
+        <IconButton
+          color={list.bgList}
+          colorScheme='gray'
+          size='xs'
+          icon={<CloseIcon />}
+          data-testid={`close-edit-icon-${card.id}`}
+          {...(getCancelButtonProps() as any)}
+        />
+      </Box>
     </ButtonGroup>
   ) : (
     <ButtonGroup justifyContent='baseline' size='sm' mr='auto' alignItems='center'>
