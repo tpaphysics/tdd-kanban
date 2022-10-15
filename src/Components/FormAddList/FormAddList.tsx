@@ -23,7 +23,7 @@ import { useRef, useState } from 'react';
 import { BsCardChecklist } from 'react-icons/bs';
 import { GiGooeyEyedSun } from 'react-icons/gi';
 import { MdAddChart, MdLabelOutline } from 'react-icons/md';
-import { TbLamp2 } from 'react-icons/tb';
+import { GiLightBulb } from 'react-icons/gi';
 import colors from '../../data/colors';
 
 function FormAddList() {
@@ -108,7 +108,7 @@ function FormAddList() {
             <FormControl mt={4}>
               <FormLabel fontStyle='italic'>
                 Color&nbsp;&nbsp;
-                <Icon as={TbLamp2} w='18px' h='18px' cursor='pointer' color={listColor} />
+                <Icon as={GiLightBulb} w='20px' h='20px' cursor='pointer' color={listColor} />
               </FormLabel>
               <HStack>
                 {colors.map((color) => (
