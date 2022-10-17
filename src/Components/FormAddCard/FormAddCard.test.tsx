@@ -20,20 +20,20 @@ describe('FormAddCard.tsx test', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
   });
-  it('Should not to be in FormAddCard the icon (+) when click in (Add card) text', () => {
+  it('Should not to be in FormAddCard the icon (+) when click in (Add task) text', () => {
     const { getByTestId, getByText } = render(<Test />);
 
     fireEvent.click(getByText(/add card/i));
     expect(() => getByTestId('icon-add')).toThrow();
   });
-  it('Should to be in FormAddCard the icon (-) when click in (Add card) text', () => {
+  it('Should to be in FormAddCard the icon (-) when click in (Add task) text', () => {
     const { getByTestId, getByText } = render(<Test />);
 
     fireEvent.click(getByText(/add card/i));
     expect(getByTestId('icon-minus')).toBeInTheDocument();
   });
 
-  it('Should to be in FormAddCard the icon (+) when click in (Add card) text two times', () => {
+  it('Should to be in FormAddCard the icon (+) when click in (Add task) text two times', () => {
     const { getByTestId, getByText } = render(<Test />);
 
     fireEvent.click(getByText(/add card/i));

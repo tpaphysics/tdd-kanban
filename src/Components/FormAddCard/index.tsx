@@ -37,7 +37,7 @@ function FormAddCard() {
           <Icon as={IoMdAddCircle} data-testid='icon-add' />
         )}
         <Text ml='6px' fontSize='14px' fontWeight='500' lineHeight='21px' textAlign='left'>
-          Add card
+          Add task
         </Text>
       </Box>
       <Collapse in={show}>
