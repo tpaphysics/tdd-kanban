@@ -12,7 +12,10 @@ export default function useFormAddList() {
   const handleAddList = useCallback(() => {
     addList({ title, bgList, tag });
     onClose();
-  }, [addList, bgList, tag, title]);
+    setTitle('');
+    setTag('');
+    setBgList('BLACK');
+  }, [addList, bgList, onClose, tag, title]);
 
   const initialRef = useRef(null);
   const finalRef = useRef(null);
