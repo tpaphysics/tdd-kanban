@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { KanbanListContext } from './Context';
+import { KanbanColumnContext } from './Context';
 
-export const useList = () => {
-  return useContext(KanbanListContext);
+export const useColumn = () => {
+  return useContext(KanbanColumnContext);
 };

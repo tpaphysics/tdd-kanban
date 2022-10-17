@@ -8,7 +8,7 @@ export const useColumnProvider = (initialColumn: IColumn) => {
   const column = { ...initialColumn, lists };
 
   const addList = useCallback(
-    (title: string, bgList: string, tag: string) => {
+    ({ title, bgList, tag }: Omit<IList, 'id' | 'cards'>) => {
       const newList = { id: uuid(), title, bgList, tag, cards: [] } as IList;
       const updated = [...lists, newList];
       setLists(updated);
