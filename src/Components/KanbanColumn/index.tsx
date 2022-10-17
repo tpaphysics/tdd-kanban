@@ -4,9 +4,7 @@ import KanbanColumnContainer from '../KanbanColumnContainer/KanbanColumnContaine
 import FormAddList from '../FormAddList/FormAddList';
 import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
 import KanbanListsContainer from '../KanbanListsContainer/KanbanListsContainer';
-interface KanbanColumnProps {
-  initialColumn: IColumn;
-}
+import { KanbanColumnProps } from './interface';
 
 function KanbanColumn({ initialColumn }: KanbanColumnProps) {
   return (

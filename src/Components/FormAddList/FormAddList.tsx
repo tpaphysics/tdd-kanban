@@ -1,7 +1,5 @@
 /* eslint-disable react/no-children-prop */
-
 import {
-  useDisclosure,
   Button,
   Modal,
   ModalOverlay,
@@ -19,26 +17,34 @@ import {
   HStack,
   Circle,
 } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
 import { BsCardChecklist } from 'react-icons/bs';
 import { GiGooeyEyedSun } from 'react-icons/gi';
 import { MdAddChart, MdLabelOutline } from 'react-icons/md';
 import { GiLightBulb } from 'react-icons/gi';
 import colors from '../../data/colors';
+import useFormAddList from './hook/useFormAddList';
 
 function FormAddList() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [newListName, setNewListName] = useState('');
-  const [listColor, setListColor] = useState('BLACK');
-
-  const [tagName, setTagName] = useState('');
-
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
+  const {
+    column,
+    isOpen,
+    onOpen,
+    onClose,
+    initialRef,
+    finalRef,
+    title,
+    setTitle,
+    tag,
+    setTag,
+    bgList,
+    setBgList,
+    handleAddList,
+  } = useFormAddList();
 
   return (
     <>
       <Icon
+        data-testid={`modal-${column.id}`}
         as={MdAddChart}
         onClick={onOpen}
         color='blackAlpha.400'
@@ -65,20 +71,16 @@ function FormAddList() {
                 <InputLeftElement
                   pointerEvents='none'
                   children={
-                    <Icon
-                      data-testid='input-icon'
-                      as={BsCardChecklist}
-                      color={newListName === '' ? 'gray.400' : 'purple.400'}
-                    />
+                    <Icon as={BsCardChecklist} color={title === '' ? 'gray.400' : 'purple.400'} />
                   }
                 />
                 <Input
+                  data-testid={`title-input-${column.id}`}
                   ref={initialRef}
                   focusBorderColor='purple.400'
-                  data-testid='task-input'
-                  onChange={(event) => setNewListName(event.target.value as string)}
-                  value={newListName}
-                  placeholder='List name'
+                  onChange={(event) => setTitle(event.target.value as string)}
+                  value={title}
+                  placeholder='List title'
                 />
               </InputGroup>
             </FormControl>
@@ -91,15 +93,15 @@ function FormAddList() {
                     <Icon
                       data-testid='input-icon'
                       as={MdLabelOutline}
-                      color={tagName === '' ? 'gray.400' : 'purple.400'}
+                      color={tag === '' ? 'gray.400' : 'purple.400'}
                     />
                   }
                 />
                 <Input
+                  data-testid={`tag-input-${column.id}`}
                   focusBorderColor='purple.400'
-                  data-testid='task-input'
-                  onChange={(event) => setTagName(event.target.value as string)}
-                  value={tagName}
+                  onChange={(event) => setTag(event.target.value as string)}
+                  value={tag}
                   placeholder='Tag name'
                 />
               </InputGroup>
@@ -108,17 +110,19 @@ function FormAddList() {
             <FormControl mt={4}>
               <FormLabel fontStyle='italic'>
                 Color&nbsp;&nbsp;
-                <Icon as={GiLightBulb} w='20px' h='20px' cursor='pointer' color={listColor} />
+                <Icon as={GiLightBulb} w='20px' h='20px' cursor='pointer' color={bgList} />
               </FormLabel>
               <HStack>
                 {colors.map((color) => (
                   <Circle
+                    aria-label={color}
+                    data-testid={`bg-${color}-${column.id}`}
                     padding='2px'
                     size='28px'
                     bg={color}
                     color='white'
                     key={color}
-                    onClick={() => setListColor(color)}
+                    onClick={() => setBgList(color)}
                   >
                     <Icon as={GiGooeyEyedSun} w='12px' h='12px' cursor='pointer' />
                   </Circle>
@@ -128,7 +132,12 @@ function FormAddList() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='purple' mr={3}>
+            <Button
+              data-testid={`add-list-${column.id}`}
+              colorScheme='purple'
+              onClick={handleAddList}
+              mr={3}
+            >
               Add list
             </Button>
             <Button onClick={onClose}>Cancel</Button>
