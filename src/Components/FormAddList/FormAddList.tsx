@@ -135,6 +135,7 @@ function FormAddList() {
             <Button
               data-testid={`add-list-${column.id}`}
               colorScheme='purple'
+              disabled={title == '' || tag == '' ? true : false}
               onClick={handleAddList}
               mr={3}
             >
