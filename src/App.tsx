@@ -10,7 +10,8 @@ function App() {
   return (
     <Flex
       w='100vw'
-      h='100vh'
+      h='100%'
+      minH='100vh'
       bgImage='url(scene.svg)'
       flexDir='column'
       backgroundRepeat='no-repeat'
