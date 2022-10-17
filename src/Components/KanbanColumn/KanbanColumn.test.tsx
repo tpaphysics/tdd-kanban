@@ -8,6 +8,7 @@ import columns from '../../data/columns';
 
 describe('KanbanColumn.tsx test', () => {
   const mockedColumn = columns[0];
+  console.log(mockedColumn);
   it('Should be on the  a new list when click in (Add task) button', () => {
     const { getByTestId, getByText } = render(<KanbanColumn initialColumn={mockedColumn} />);
 
@@ -26,13 +27,13 @@ describe('KanbanColumn.tsx test', () => {
 
     expect(getByText('R2D2')).toBeInTheDocument();
   });
-  it('Should be exclude the task card when click in trash icon', () => {
-    const { cards } = mockedColumn;
+  it('Should be exclude the list when click in (X) icon', () => {
+    const { lists } = mockedColumn;
     const { getByTestId } = render(<KanbanColumn initialColumn={mockedColumn} />);
-    const trashIcon = getByTestId(`trash-icon-${cards[0].id}`);
+    const trashIcon = getByTestId(`close-list-${lists[0].id}`);
 
     fireEvent.click(trashIcon);
 
-    expect(() => getByTestId(`trash-icon-${cards[0].id}`)).toThrow();
+    expect(() => getByTestId(`close-list-${lists[0].id}`)).toThrow();
   });
 });

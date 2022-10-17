@@ -3,7 +3,6 @@ import React from 'react';
 import { BsTrashFill } from 'react-icons/bs';
 import { GiRapidshareArrow, GiSupersonicArrow } from 'react-icons/gi';
 import { BsCheckCircle } from 'react-icons/bs';
-import { CheckIcon, EditIcon, CloseIcon } from '@chakra-ui/icons';
 
 import {
   Box,
@@ -29,7 +28,6 @@ function EditableCard({ card }: EditableCardsProps) {
   const {
     list,
     preTask,
-    task,
     finished,
     handleClickTag,
     handleEditTask,
