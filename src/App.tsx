@@ -21,6 +21,7 @@ function App() {
     >
       <Flex
         w='100%'
+        minW='100vw'
         h='50px'
         alignItems='center'
         justifyContent='center'
