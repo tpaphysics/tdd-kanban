@@ -5,15 +5,23 @@ import KanbanCardsContainer from '../KanbanCardsContainer';
 import KanbanListContainer from '../KanbanListContainer/KanbanListContainer';
 import KanbanListProvider from '../../Hooks/useList/Provider';
 import { KanbanListProps } from './interface';
+import { StrictModeDroppable } from '../StrictModeDroppable';
 
-function KanbanList({ list, ...props }: KanbanListProps) {
+function KanbanList({ list }: KanbanListProps) {
   return (
     <KanbanListProvider initialList={list}>
-      <KanbanListContainer {...props}>
-        <KanbanListHeader />
-        <KanbanCardsContainer />
-        <FormAddCard />
-      </KanbanListContainer>
+      <StrictModeDroppable droppableId={list.id} key={`droppable-list-${list.id}`} type='card'>
+        {(provided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            <KanbanListContainer>
+              <KanbanListHeader />
+              <KanbanCardsContainer />
+              {provided.placeholder}
+              <FormAddCard />
+            </KanbanListContainer>
+          </div>
+        )}
+      </StrictModeDroppable>
     </KanbanListProvider>
   );
 }

@@ -12,7 +12,9 @@ function KanbanCardsContainer() {
       {list.cards.length == 0 ? (
         <EmptyCards />
       ) : (
-        list.cards.map((card) => <EditableCard card={card} key={card.id} />)
+        list.cards.map((card, index) => (
+          <EditableCard card={card} key={card.id} cardIndex={index} />
+        ))
       )}
     </VStack>
   );

@@ -1,8 +1,8 @@
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import React from 'react';
-import { RiFileList3Line } from 'react-icons/ri';
 import { useColumn } from '../../Hooks/useColumn';
 import EmptyLists from '../EmptyLists/EmprtyLists';
+import { Draggable } from 'react-beautiful-dnd';
+
 import KanbanList from '../KanbanList';
 
 function KanbanListsContainer() {
@@ -12,7 +12,19 @@ function KanbanListsContainer() {
       {column.lists.length == 0 ? (
         <EmptyLists />
       ) : (
-        column.lists.map((list) => <KanbanList list={list} key={list.id} />)
+        column.lists.map((list, index) => (
+          <Draggable draggableId={list.id} key={list.id} index={index}>
+            {(provided) => (
+              <div
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+              >
+                <KanbanList list={list} />
+              </div>
+            )}
+          </Draggable>
+        ))
       )}
     </>
   );

@@ -1,10 +1,10 @@
-import { Box, Button, Flex, HStack, VStack, Icon, Text, Avatar, Link } from '@chakra-ui/react';
-import KanbanList from './Components/KanbanList';
+import { Button, Flex, HStack, Text, Link } from '@chakra-ui/react';
+
 import columns from './data/columns';
-import { MdAddChart } from 'react-icons/md';
-import lists from './data/lists';
-import images from './data/images';
+
 import KanbanColumn from './Components/KanbanColumn';
+import { DragDropContext } from 'react-beautiful-dnd';
+import KanbanColumnsContainer from './Components/KanbanColumnsContainer/KanbanColumnsContainer';
 
 function App() {
   return (
@@ -40,10 +40,10 @@ function App() {
           </Button>
         </Link>
       </Flex>
-      <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto'>
-        {columns.map((column) => (
-          <KanbanColumn initialColumn={column} key={column.id} />
-        ))}
+      <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto' flex='1'>
+        <DragDropContext onDragEnd={console.log}>
+          <KanbanColumnsContainer />
+        </DragDropContext>
       </HStack>
     </Flex>
   );
