@@ -2,19 +2,20 @@ import React from 'react';
 import { IColumn } from '../../data/interfaces/IColumn';
 import KanbanColumnContainer from '../KanbanColumnContainer/KanbanColumnContainer';
 import FormAddList from '../FormAddList/FormAddList';
-import KanbanList from '../KanbanList';
+import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
+import KanbanListsContainer from '../KanbanListsContainer/KanbanListsContainer';
 interface KanbanColumnProps {
   initialColumn: IColumn;
 }
 
-function KanbanColumn({ initialColumn: column }: KanbanColumnProps) {
+function KanbanColumn({ initialColumn }: KanbanColumnProps) {
   return (
-    <KanbanColumnContainer>
-      <FormAddList />
-      {column.lists.map((list) => (
-        <KanbanList list={list} key={list.id} />
-      ))}
-    </KanbanColumnContainer>
+    <KanbanColumnProvider initialColumn={initialColumn}>
+      <KanbanColumnContainer>
+        <FormAddList />
+        <KanbanListsContainer />
+      </KanbanColumnContainer>
+    </KanbanColumnProvider>
   );
 }
 
