@@ -39,30 +39,4 @@ describe('useFormAddList hook test', () => {
     expect(result.current.tag).toEqual('');
     expect(result.current.title).toEqual('');
   });
-  it('handleClick, should be updateded the newTask value for empty', () => {
-    const { result } = renderHook(() => useFormAddList(), { wrapper });
-
-    act(() => {
-      result.current.setNewTask('TASK');
-    });
-
-    act(() => {
-      result.current.handleClick();
-    });
-    expect(mockedUseColumn).toBeCalled();
-    expect(result.current.newTask).toEqual('');
-  });
-  it('handleClick, should be updateded the show value for false', () => {
-    const { result } = renderHook(() => useFormAddList(), { wrapper });
-
-    act(() => {
-      result.current.setShow(true);
-    });
-
-    act(() => {
-      result.current.handleClick();
-    });
-    expect(mockedUseColumn).toBeCalled();
-    expect(result.current.show).toEqual(false);
-  });
 });
