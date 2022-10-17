@@ -26,4 +26,13 @@ describe('KanbanList.tsx test', () => {
 
     expect(() => getByTestId(`trash-icon-${cards[0].id}`)).toThrow();
   });
+  it('Should be disabled button (Add task) when input task to be empty', () => {
+    const { getByTestId, getByLabelText } = render(<KanbanList list={mockedList} />);
+    const button = getByLabelText(`task-button-${mockedList.id}`);
+
+    const input = getByTestId('task-input');
+    fireEvent.change(input, { target: { value: '' } });
+
+    expect(button).toHaveProperty('disabled', true);
+  });
 });

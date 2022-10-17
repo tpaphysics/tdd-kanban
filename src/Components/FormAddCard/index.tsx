@@ -64,12 +64,14 @@ function FormAddCard() {
           <Button
             //disabled={newTask == '' ? true : false}
             data-testid='task-button'
+            aria-label={`task-button-${list.id}`}
             colorScheme='whiteAlpha'
             mt='15px'
             float='right'
             type='submit'
             size='md'
             onClick={handleClick}
+            disabled={newTask == '' ? true : false}
           >
             Add task
           </Button>
