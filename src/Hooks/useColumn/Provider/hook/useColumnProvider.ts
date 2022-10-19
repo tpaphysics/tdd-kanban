@@ -2,25 +2,29 @@ import { useCallback, useState } from 'react';
 import uuid from 'react-uuid';
 import { IColumn } from '../../../../data/interfaces/IColumn';
 import { IList } from '../../../../data/interfaces/IList';
+import { useKanban } from '../../../useKanban';
 
 export const useColumnProvider = (initialColumn: IColumn) => {
-  const [lists, setLists] = useState(initialColumn.lists);
-  const column = { ...initialColumn, lists };
+  const [column] = useState(initialColumn);
+
+  const { handleUpdateLists } = useKanban();
 
   const addList = useCallback(
     ({ title, bgList, tag }: Omit<IList, 'id' | 'cards'>) => {
+      const { lists } = column;
       const newList = { id: uuid(), title, bgList, tag, cards: [] } as IList;
-      const updated = [...lists, newList];
-      setLists(updated);
+      const updatedLists = [...lists, newList];
+      handleUpdateLists(column, updatedLists);
     },
-    [lists],
+    [column, handleUpdateLists],
   );
   const removeList = useCallback(
     (listId: string) => {
-      const updated = lists.filter((card) => listId != card.id);
-      setLists(updated);
+      const { lists } = column;
+      const updatedLists = lists.filter((list) => listId != list.id);
+      handleUpdateLists(column, updatedLists);
     },
-    [lists],
+    [column, handleUpdateLists],
   );
 
   return { column, addList, removeList };

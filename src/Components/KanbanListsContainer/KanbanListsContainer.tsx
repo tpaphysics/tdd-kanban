@@ -13,7 +13,11 @@ function KanbanListsContainer() {
         <EmptyLists />
       ) : (
         column.lists.map((list, index) => (
-          <Draggable draggableId={list.id} key={list.id} index={index}>
+          <Draggable
+            draggableId={`columnId:${column.id},listId:${list.id}`}
+            key={list.id}
+            index={index}
+          >
             {(provided) => (
               <div
                 {...provided.draggableProps}

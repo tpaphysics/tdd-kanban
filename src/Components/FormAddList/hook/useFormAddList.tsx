@@ -7,6 +7,7 @@ export default function useFormAddList() {
   const [title, setTitle] = useState('');
   const [bgList, setBgList] = useState('BLACK');
   const [tag, setTag] = useState('');
+
   const { column, addList } = useColumn();
 
   const handleAddList = useCallback(() => {

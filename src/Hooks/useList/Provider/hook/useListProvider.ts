@@ -2,25 +2,29 @@ import { useCallback, useState } from 'react';
 import { IList } from '../../../../data/interfaces/IList';
 import uuid from 'react-uuid';
 import { ICard } from '../../../../data/interfaces/ICard';
+import { useColumn } from '../../../useColumn';
+import { useKanban } from '../../../useKanban';
 
 export const useListProvider = (initialList: IList) => {
-  const [cards, setCards] = useState(initialList.cards);
-  const list = { ...initialList, cards };
+  const [list] = useState(initialList);
+  const { column } = useColumn();
+  const { handleUpdateCards } = useKanban();
 
   const addCard = useCallback(
     (newTask: string) => {
+      const { cards } = list;
       const newCard = { id: uuid(), task: newTask, finished: false } as ICard;
-      const updated = [...cards, newCard];
-      setCards(updated);
+      const updatedCards = [...cards, newCard];
+      handleUpdateCards(column, list, updatedCards);
     },
-    [cards],
+    [column, handleUpdateCards, list],
   );
   const removeCard = useCallback(
     (cardId: string) => {
-      const updated = cards.filter((card) => cardId != card.id);
-      setCards(updated);
+      const updatedCards = list.cards.filter((card) => cardId != card.id);
+      handleUpdateCards(column, list, updatedCards);
     },
-    [cards],
+    [column, handleUpdateCards, list],
   );
 
   return { list, addCard, removeCard };

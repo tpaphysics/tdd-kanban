@@ -9,6 +9,7 @@ import { useList } from '../../Hooks/useList';
 function KanbanListHeader() {
   const { list } = useList();
   const { removeList } = useColumn();
+
   return (
     <Flex alignItems='center' justifyContent='space-between' w='100%'>
       <Text fontSize='16px' fontWeight='700' lineHeight='24.59px' color='WHITE'>

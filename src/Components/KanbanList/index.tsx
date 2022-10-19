@@ -10,7 +10,7 @@ import { StrictModeDroppable } from '../StrictModeDroppable';
 function KanbanList({ list }: KanbanListProps) {
   return (
     <KanbanListProvider initialList={list}>
-      <StrictModeDroppable droppableId={list.id} key={`droppable-list-${list.id}`} type='card'>
+      <StrictModeDroppable droppableId={list.id} key={list.id} type='card'>
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             <KanbanListContainer>

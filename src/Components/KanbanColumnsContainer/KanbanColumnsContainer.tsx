@@ -1,8 +1,10 @@
 import React from 'react';
-import columns from '../../data/columns';
+import { useKanban } from '../../Hooks/useKanban';
 import KanbanColumn from '../KanbanColumn';
 
 function KanbanColumnsContainer() {
+  const { columns } = useKanban();
+
   return (
     <>
       {columns.map((column) => (

@@ -1,10 +1,7 @@
 import { Button, Flex, HStack, Text, Link } from '@chakra-ui/react';
-
-import columns from './data/columns';
-
-import KanbanColumn from './Components/KanbanColumn';
 import { DragDropContext } from 'react-beautiful-dnd';
 import KanbanColumnsContainer from './Components/KanbanColumnsContainer/KanbanColumnsContainer';
+import KanbanProvider from './Hooks/useKanban/Provider';
 
 function App() {
   return (
@@ -42,7 +39,9 @@ function App() {
       </Flex>
       <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto' flex='1'>
         <DragDropContext onDragEnd={console.log}>
-          <KanbanColumnsContainer />
+          <KanbanProvider>
+            <KanbanColumnsContainer />
+          </KanbanProvider>
         </DragDropContext>
       </HStack>
     </Flex>
