@@ -116,7 +116,7 @@ function EditableCard({ card, cardIndex }: EditableCardsProps) {
               >
                 <TagLeftIcon as={finished ? GiSupersonicArrow : GiRapidshareArrow} />
                 <TagLabel fontWeight='700' fontSize='12px' color='WHITE'>
-                  {list.tag}
+                  {card.tag}
                 </TagLabel>
               </Tag>
             </Text>

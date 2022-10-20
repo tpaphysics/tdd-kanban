@@ -13,7 +13,7 @@ export const useListProvider = (initialList: IList) => {
   const addCard = useCallback(
     (newTask: string) => {
       const { cards } = list;
-      const newCard = { id: uuid(), task: newTask, finished: false } as ICard;
+      const newCard = { id: uuid(), task: newTask, tag: list.tag, finished: false } as ICard;
       const updatedCards = [...cards, newCard];
       handleUpdateCards(column, list, updatedCards);
     },

@@ -6,11 +6,17 @@ import KanbanListContainer from '../KanbanListContainer/KanbanListContainer';
 import KanbanListProvider from '../../Hooks/useList/Provider';
 import { KanbanListProps } from './interface';
 import { StrictModeDroppable } from '../StrictModeDroppable';
+import { useColumn } from '../../Hooks/useColumn';
 
 function KanbanList({ list }: KanbanListProps) {
+  const { column } = useColumn();
   return (
     <KanbanListProvider initialList={list}>
-      <StrictModeDroppable droppableId={list.id} key={list.id} type='card'>
+      <StrictModeDroppable
+        droppableId={`{"listId":"${list.id}","columnId":"${column.id}"}`}
+        key={list.id}
+        type='card'
+      >
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             <KanbanListContainer>

@@ -1,9 +1,11 @@
 import { Button, Flex, HStack, Text, Link } from '@chakra-ui/react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import KanbanColumnsContainer from './Components/KanbanColumnsContainer/KanbanColumnsContainer';
-import KanbanProvider from './Hooks/useKanban/Provider';
+import { useKanban } from './Hooks/useKanban';
 
 function App() {
+  const { onDragEnd } = useKanban();
+
   return (
     <Flex
       w='100vw'
@@ -14,6 +16,7 @@ function App() {
       backgroundRepeat='no-repeat'
       bgPosition='bottom'
       backgroundPosition='95% 80%'
+
       //justifyContent={'center'}
     >
       <Flex
@@ -37,11 +40,10 @@ function App() {
           </Button>
         </Link>
       </Flex>
+
       <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto' flex='1'>
-        <DragDropContext onDragEnd={console.log}>
-          <KanbanProvider>
-            <KanbanColumnsContainer />
-          </KanbanProvider>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <KanbanColumnsContainer />
         </DragDropContext>
       </HStack>
     </Flex>

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import KanbanColumnContainer from '../KanbanColumnContainer/KanbanColumnContainer';
 import FormAddList from '../FormAddList/FormAddList';
 import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
 import KanbanListsContainer from '../KanbanListsContainer/KanbanListsContainer';
-import { KanbanColumnProps } from './interface';
 import { StrictModeDroppable } from '../StrictModeDroppable';
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
+import { IColumn } from '../../data/interfaces/IColumn';
 
-function KanbanColumn({ initialColumn }: KanbanColumnProps) {
+interface KanbanColumnProps extends BoxProps {
+  initialColumn: IColumn;
+}
+
+function KanbanColumn({ initialColumn, ...props }: KanbanColumnProps) {
   return (
-    <KanbanColumnProvider initialColumn={initialColumn}>
+    <KanbanColumnProvider initialColumn={initialColumn} {...props}>
       <StrictModeDroppable
-        droppableId={initialColumn.id}
+        droppableId={`{"columnId":"${initialColumn.id}","listId":""}`}
         key={`droppable-list-${initialColumn.id}`}
         type='list'
       >
