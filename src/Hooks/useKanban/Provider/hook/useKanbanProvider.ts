@@ -45,8 +45,6 @@ export const useKanbanProvider = (initialColumns: IColumn[]) => {
     (result: DropResult) => {
       const { type, source, destination } = result;
 
-      console.log(result);
-
       if (!destination) return;
 
       const { listId: listSourceId, columnId: columnSourceId } = JSON.parse(source.droppableId);

@@ -1,4 +1,5 @@
 import { ICard } from '../../../../../data/interfaces/ICard';
+import { IColumn } from '../../../../../data/interfaces/IColumn';
 import { IList } from '../../../../../data/interfaces/IList';
 
 const changePosition = (cards: ICard[] | IList[] | any, from: number, to: number) => {
@@ -6,4 +7,14 @@ const changePosition = (cards: ICard[] | IList[] | any, from: number, to: number
   return cards;
 };
 
-export { changePosition };
+const setStorage = (columns: IColumn[]) => {
+  localStorage.setItem('kanban:columns', JSON.stringify(columns));
+};
+
+const getStorage = () => {
+  const getColumns = localStorage.getItem('kanban:columns');
+  if (getColumns) return JSON.parse(getColumns as string);
+  return;
+};
+
+export { changePosition, setStorage, getStorage };

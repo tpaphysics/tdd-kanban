@@ -51,6 +51,25 @@ describe('useKanbanProvider hook test', () => {
     combine: null,
   };
 
+  const mockedMovedCard3 = {
+    draggableId:
+      '{"columnId":"836465da-523a-49bf-8ff2-33a4a2df275b","cardId":"36c9f0eb-12f8-4d22-8b12-5aae52d1f339"}',
+    type: 'card',
+    source: {
+      index: 0,
+      droppableId:
+        '{"listId":"a4557776-4933-404d-983e-3d502d73b332","columnId":"836465da-523a-49bf-8ff2-33a4a2df275b"}',
+    },
+    reason: 'DROP',
+    mode: 'FLUID',
+    destination: {
+      droppableId:
+        '{"listId":"196700bc-b6ff-4e6b-ad1b-3be61d771db7","columnId":"836465da-523a-49bf-8ff2-33a4a2df275b"}',
+      index: 0,
+    },
+    combine: null,
+  };
+
   const mockedMovedList1 = {
     draggableId: 'a4557776-4933-404d-983e-3d502d73b332',
     type: 'list',
