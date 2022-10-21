@@ -61,8 +61,8 @@ describe('useKanbanProvider hook test', () => {
     reason: 'DROP',
     mode: 'FLUID',
     destination: {
-      droppableId: '{"columnId":"a8fdb3bc-8399-4e27-91da-3ddbb6cd9eb5","listId":""}',
-      index: 0,
+      droppableId: '{"columnId":"836465da-523a-49bf-8ff2-33a4a2df275b","listId":""}',
+      index: 1,
     },
     combine: null,
   };
@@ -136,12 +136,32 @@ describe('useKanbanProvider hook test', () => {
     const wrapper = ({ children }: BoxProps) => <KanbanProvider>{children}</KanbanProvider>;
     const { result } = renderHook(() => useKanban(), { wrapper });
 
+    const mockedMovedListColumn1To2 = {
+      draggableId: '196700bc-b6ff-4e6b-ad1b-3be61d771db7',
+      type: 'list',
+      source: {
+        index: 0,
+        droppableId: '{"columnId":"a8fdb3bc-8399-4e27-91da-3ddbb6cd9eb5","listId":""}',
+      },
+      reason: 'DROP',
+      mode: 'FLUID',
+      destination: {
+        droppableId: '{"columnId":"836465da-523a-49bf-8ff2-33a4a2df275b","listId":""}',
+        index: 1,
+      },
+      combine: null,
+    };
+
+    act(() => {
+      result.current?.onDragEnd(mockedMovedListColumn1To2 as any);
+    });
+
     act(() => {
       result.current?.onDragEnd(mockedMovedList1 as any);
     });
 
-    const response = result.current.columns[1].lists[0].bgList;
+    const response = result.current.columns[0].lists[0].bgList;
 
-    expect(response).toBe('BLUE');
+    expect(response).toBe('PURPLE');
   });
 });
