@@ -1,1 +1,1 @@
-export default ['BLUE', 'PURPLE', 'GREEN', 'BLACK', 'ORANGE', 'YELLOW'];
+export default ['BLUE', 'PURPLE', 'GREEN', 'PINK', 'BLACK', 'ORANGE', 'YELLOW', 'TEAL'];

@@ -2,16 +2,24 @@ import { BoxProps } from '@chakra-ui/react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import KanbanListProvider from '..';
 import { useList } from '../..';
+import columns from '../../../../data/columns';
 import { ICard } from '../../../../data/interfaces/ICard';
-import lists from '../../../../data/lists';
+import KanbanColumnProvider from '../../../useColumn/Provider';
+import KanbanProvider from '../../../useKanban/Provider';
 
 describe('useKanbanListProvider hook test', () => {
-  const mockedList = lists[0];
+  const mockedColumn = columns[0];
+  const mockedList = mockedColumn.lists[0];
+
+  const wrapper = ({ children }: BoxProps) => (
+    <KanbanProvider>
+      <KanbanColumnProvider initialColumn={mockedColumn}>
+        <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+      </KanbanColumnProvider>
+    </KanbanProvider>
+  );
 
   it('should be the initial card value state equal mockedList', () => {
-    const wrapper = ({ children }: BoxProps) => (
-      <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
-    );
     const { result } = renderHook(() => useList(), { wrapper });
 
     act(() => {
@@ -22,9 +30,6 @@ describe('useKanbanListProvider hook test', () => {
   });
 
   it('addCard, Should contain one card with task equal (My task) in the list cards', () => {
-    const wrapper = ({ children }: BoxProps) => (
-      <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
-    );
     const { result } = renderHook(() => useList(), { wrapper });
 
     act(() => {
@@ -34,9 +39,6 @@ describe('useKanbanListProvider hook test', () => {
     expect(response?.length).toBe(1);
   });
   it('removeCard, Should remove card the list of cards', () => {
-    const wrapper = ({ children }: BoxProps) => (
-      <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
-    );
     const { result } = renderHook(() => useList(), { wrapper });
 
     const mockedId = mockedList.cards[0].id;

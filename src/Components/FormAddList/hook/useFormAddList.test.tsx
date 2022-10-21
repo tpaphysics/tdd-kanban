@@ -6,17 +6,24 @@ import columns from '../../../data/columns';
 import KanbanColumnProvider from '../../../Hooks/useColumn/Provider';
 import * as useColumn from '../../../Hooks/useColumn';
 import useFormAddList from './useFormAddList';
+import KanbanProvider from '../../../Hooks/useKanban/Provider';
+import KanbanListProvider from '../../../Hooks/useList/Provider';
+import * as useKanban from '../../../Hooks/useKanban';
 
 describe('useFormAddList hook test', () => {
-  const mockedcolumn = columns[0];
+  const mockedColumn = columns[0];
+  const mockedList = mockedColumn.lists[0];
 
   const wrapper = ({ children }: BoxProps) => (
-    <KanbanColumnProvider initialColumn={mockedcolumn}>{children}</KanbanColumnProvider>
+    <KanbanProvider>
+      <KanbanColumnProvider initialColumn={mockedColumn}>
+        <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+      </KanbanColumnProvider>
+    </KanbanProvider>
   );
 
-  const mockedUseColumn = vi
-    .spyOn(useColumn, 'useColumn')
-    .mockImplementation(() => ({ AddCard: vi.fn() } as any));
+  vi.spyOn(useColumn, 'useColumn').mockImplementation(() => ({} as any));
+  vi.spyOn(useKanban, 'useKanban').mockImplementation(() => ({} as any));
 
   beforeAll(() => {
     vi.clearAllMocks();

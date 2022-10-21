@@ -1,15 +1,27 @@
 import { BoxProps } from '@chakra-ui/react';
 import { act, renderHook } from '@testing-library/react';
 import { describe, it, vi } from 'vitest';
+import columns from '../../../data/columns';
 import lists from '../../../data/lists';
+import KanbanColumnProvider from '../../../Hooks/useColumn/Provider';
+import KanbanProvider from '../../../Hooks/useKanban/Provider';
 import * as useList from '../../../Hooks/useList';
 import KanbanListProvider from '../../../Hooks/useList/Provider';
 import { useEditableCard } from './useEditableCard';
 
 describe('useEditableCard hook test', () => {
-  useList;
-  const mockedList = lists[0];
+  const mockedColumn = columns[0];
+  const mockedList = mockedColumn.lists[0];
   const mockedCard = mockedList.cards[0];
+
+  const wrapper = ({ children }: BoxProps) => (
+    <KanbanProvider>
+      <KanbanColumnProvider initialColumn={mockedColumn}>
+        <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+      </KanbanColumnProvider>
+    </KanbanProvider>
+  );
+
   const mockedUseList = vi
     .spyOn(useList, 'useList')
     .mockImplementation(
@@ -18,9 +30,6 @@ describe('useEditableCard hook test', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
   });
-  const wrapper = ({ children }: BoxProps) => (
-    <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
-  );
 
   it('should be false the finished state by default', () => {
     const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });

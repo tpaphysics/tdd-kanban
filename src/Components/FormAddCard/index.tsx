@@ -30,6 +30,7 @@ function FormAddCard() {
         _hover={{ color: 'white', transitionDuration: '0.3s' }}
         cursor='pointer'
         onClick={handleToogle}
+        data-testid='view-more-add-task'
       >
         {show ? (
           <Icon as={AiFillMinusCircle} data-testid='icon-minus' />

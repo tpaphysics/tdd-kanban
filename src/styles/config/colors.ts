@@ -5,6 +5,7 @@ export default {
   BLUE: '#5CC4FF',
   PURPLE: '#945AD1',
   GREEN: '#59D090',
+  PINK: '#ED64A6',
   YELLOW: '#ECC94B',
   ORANGE: '#ED8936',
   WHITE: '#FFFFFF',

@@ -5,39 +5,47 @@ import { fireEvent, render } from '@testing-library/react';
 
 import FormAddCard from '.';
 import KanbanListProvider from '../../Hooks/useList/Provider';
-import lists from '../../data/lists';
+
+import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
+import KanbanProvider from '../../Hooks/useKanban/Provider';
+import columns from '../../data/columns';
 
 describe('FormAddCard.tsx test', () => {
-  const mockedList = lists[0];
+  const mockedColumn = columns[0];
+  const mockedList = mockedColumn.lists[0];
 
   function Test() {
     return (
-      <KanbanListProvider initialList={mockedList}>
-        <FormAddCard />
-      </KanbanListProvider>
+      <KanbanProvider>
+        <KanbanColumnProvider initialColumn={mockedColumn}>
+          <KanbanListProvider initialList={mockedList}>
+            <FormAddCard />
+          </KanbanListProvider>
+        </KanbanColumnProvider>
+      </KanbanProvider>
     );
   }
   beforeEach(() => {
     vi.restoreAllMocks();
   });
   it('Should not to be in FormAddCard the icon (+) when click in (Add task) text', () => {
-    const { getByTestId, getByText } = render(<Test />);
+    const { getByTestId } = render(<Test />);
 
-    fireEvent.click(getByText(/add card/i));
+    fireEvent.click(getByTestId('icon-add'));
     expect(() => getByTestId('icon-add')).toThrow();
   });
-  it('Should to be in FormAddCard the icon (-) when click in (Add task) text', () => {
-    const { getByTestId, getByText } = render(<Test />);
+  it('Should to be in the component the icon (-) when click in (+ Add task)', () => {
+    const { getByTestId } = render(<Test />);
 
-    fireEvent.click(getByText(/add card/i));
+    fireEvent.click(getByTestId('icon-add'));
     expect(getByTestId('icon-minus')).toBeInTheDocument();
   });
 
-  it('Should to be in FormAddCard the icon (+) when click in (Add task) text two times', () => {
-    const { getByTestId, getByText } = render(<Test />);
+  it('Should to be the component the icon (+) when click in (+ Add task) text two times', () => {
+    const { getByTestId } = render(<Test />);
 
-    fireEvent.click(getByText(/add card/i));
-    fireEvent.click(getByText(/add card/i));
+    fireEvent.click(getByTestId('view-more-add-task'));
+    fireEvent.click(getByTestId('view-more-add-task'));
 
     expect(getByTestId('icon-add')).toBeInTheDocument();
   });

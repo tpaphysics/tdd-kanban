@@ -2,21 +2,37 @@ import { BoxProps } from '@chakra-ui/react';
 import { act, renderHook } from '@testing-library/react';
 import React from 'react';
 import { describe, it, vi } from 'vitest';
-import lists from '../../../data/lists';
+import columns from '../../../data/columns';
+
+import KanbanColumnProvider from '../../../Hooks/useColumn/Provider';
+import * as useKanban from '../../../Hooks/useKanban';
+import KanbanProvider from '../../../Hooks/useKanban/Provider';
 import * as useList from '../../../Hooks/useList';
+
 import KanbanListProvider from '../../../Hooks/useList/Provider';
 import { useFormAddCard } from './useFormAddCard';
 
 describe('useFormAddCard hook test', () => {
-  const mockedList = lists[0];
+  const mockedColumn = columns[0];
+  const mockedList = mockedColumn.lists[0];
 
   const wrapper = ({ children }: BoxProps) => (
-    <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+    <KanbanProvider>
+      <KanbanColumnProvider initialColumn={mockedColumn}>
+        <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
+      </KanbanColumnProvider>
+    </KanbanProvider>
   );
+
+  const mockedUseKanban = vi
+    .spyOn(useKanban, 'useKanban')
+    .mockImplementation(() => ({ handleUpdateCards: vi.fn() } as any));
 
   const mockedUseList = vi
     .spyOn(useList, 'useList')
     .mockImplementation(() => ({ AddCard: vi.fn() } as any));
+
+  const mockedUseColumn = vi.spyOn(useList, 'useList').mockImplementation(() => ({} as any));
 
   beforeAll(() => {
     vi.restoreAllMocks();
@@ -66,7 +82,10 @@ describe('useFormAddCard hook test', () => {
     act(() => {
       result.current.handleClick();
     });
+    expect(mockedUseKanban).toBeCalled();
+    expect(mockedUseColumn).toBeCalled();
     expect(mockedUseList).toBeCalled();
+
     expect(result.current.newTask).toEqual('');
   });
   it('handleClick, should be updateded the show value for false', () => {
@@ -79,7 +98,10 @@ describe('useFormAddCard hook test', () => {
     act(() => {
       result.current.handleClick();
     });
+    expect(mockedUseKanban).toBeCalled();
     expect(mockedUseList).toBeCalled();
+    expect(mockedUseColumn).toBeCalled();
+
     expect(result.current.show).toEqual(false);
   });
 });

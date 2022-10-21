@@ -30,7 +30,7 @@ describe('useKanbanProvider hook test', () => {
     const mockedUpdatedCards = [...mockedList.cards, { id: uuid(), task: 'TEST', finished: false }];
     console.log(mockedUpdatedCards);
     act(() => {
-      result.current?.handleUpdateCards(mockedColumn, mockedList, mockedUpdatedCards);
+      result.current?.handleUpdateCards(mockedColumn, mockedList, mockedUpdatedCards as any);
     });
 
     const response = result.current.columns[0].lists[0].cards.filter(

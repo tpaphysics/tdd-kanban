@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import KanbanColumnContainer from '../KanbanColumnContainer/KanbanColumnContainer';
 import FormAddList from '../FormAddList/FormAddList';
 import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
