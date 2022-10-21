@@ -51,6 +51,22 @@ describe('useKanbanProvider hook test', () => {
     combine: null,
   };
 
+  const mockedMovedList1 = {
+    draggableId: 'a4557776-4933-404d-983e-3d502d73b332',
+    type: 'list',
+    source: {
+      index: 0,
+      droppableId: '{"columnId":"836465da-523a-49bf-8ff2-33a4a2df275b","listId":""}',
+    },
+    reason: 'DROP',
+    mode: 'FLUID',
+    destination: {
+      droppableId: '{"columnId":"a8fdb3bc-8399-4e27-91da-3ddbb6cd9eb5","listId":""}',
+      index: 0,
+    },
+    combine: null,
+  };
+
   it('should be the initial column value equal mockedColumns', () => {
     const wrapper = ({ children }: BoxProps) => <KanbanProvider>{children}</KanbanProvider>;
     const { result } = renderHook(() => useKanban(), { wrapper });
@@ -114,5 +130,18 @@ describe('useKanbanProvider hook test', () => {
     const response = result.current.columns[1].lists[0].cards[0].task;
 
     expect(response).toBe('Task 2');
+  });
+
+  it('onDragEnd, Should be moved list for other column', () => {
+    const wrapper = ({ children }: BoxProps) => <KanbanProvider>{children}</KanbanProvider>;
+    const { result } = renderHook(() => useKanban(), { wrapper });
+
+    act(() => {
+      result.current?.onDragEnd(mockedMovedList1 as any);
+    });
+
+    const response = result.current.columns[1].lists[0].bgList;
+
+    expect(response).toBe('BLUE');
   });
 });
