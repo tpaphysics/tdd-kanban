@@ -352,6 +352,88 @@ describe('EditableCard.tsx test', () => {
 
 This way we can test each component part separately.
 
+Below is the kanban move function:
+
+**_onDragEnd function_**
+
+```tsx
+const onDragEnd = useCallback(
+  (result: DropResult) => {
+    const { type, source, destination } = result;
+
+    if (!destination) return;
+
+    const { listId: listSourceId, columnId: columnSourceId } = JSON.parse(source.droppableId);
+    const { listId: listDestinationId, columnId: columnDestinationId } = JSON.parse(
+      (destination as any).droppableId,
+    );
+
+    const listSourceIndex = source.index;
+    const listDestinationIndex = destination?.index;
+
+    if (type === 'card' && columnSourceId === columnDestinationId) {
+      columns.map((column) => {
+        if (column.id === columnSourceId) {
+          column.lists.map((list) => {
+            if (list.id === listSourceId) {
+              list.cards = changePosition(
+                list.cards,
+                listSourceIndex,
+                listDestinationIndex as number,
+              );
+            }
+          });
+        }
+      });
+    }
+    if (type === 'card' && source.droppableId != (destination.droppableId as any)) {
+      let removedCard: ICard;
+      columns.map((column) => {
+        if (column.id === columnSourceId) {
+          column.lists.map((list) => {
+            if (list.id === listSourceId) {
+              [removedCard] = list.cards.splice(listSourceIndex, 1);
+            }
+          });
+        }
+      });
+
+      columns.map((column) => {
+        if (column.id === columnDestinationId) {
+          column.lists.map((list) => {
+            if (list.id === listDestinationId) {
+              list.cards.splice(listDestinationIndex as any, 0, removedCard);
+            }
+          });
+        }
+      });
+    }
+    if (type === 'list' && columnSourceId === columnDestinationId) {
+      columns.map((column) => {
+        if (column.id === columnSourceId) {
+          column.lists = changePosition(column.lists, listSourceIndex, listDestinationIndex as any);
+        }
+      });
+    }
+    if (type === 'list' && columnSourceId !== columnDestinationId) {
+      let removedList: IList;
+      columns.map((column) => {
+        if (column.id === columnSourceId) {
+          [removedList] = column.lists.splice(listSourceIndex, 1);
+        }
+      });
+
+      columns.map((column) => {
+        if (column.id === columnDestinationId) {
+          column.lists.splice(listDestinationIndex as any, 0, removedList);
+        }
+      });
+    }
+  },
+  [columns],
+);
+```
+
 ## **💥 Considerations**
 
 Frontend tests help to standardize and minimize errors, user experience. It facilitates group work between development teams and contributes to a scalable and quality final solution.
