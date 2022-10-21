@@ -15,8 +15,6 @@ describe('EditableCard.tsx test', () => {
   const mockedList = mockedColumn.lists[0];
   const mockedCard = mockedList.cards[0];
 
-  console.log(mockedCard);
-
   const ContainerTest = () => (
     <KanbanProvider>
       <KanbanColumnProvider initialColumn={mockedColumn}>

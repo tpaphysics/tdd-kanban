@@ -45,6 +45,10 @@ export const useKanbanProvider = (initialColumns: IColumn[]) => {
     (result: DropResult) => {
       const { type, source, destination } = result;
 
+      console.log(result);
+
+      if (!destination) return;
+
       const { listId: listSourceId, columnId: columnSourceId } = JSON.parse(source.droppableId);
       const { listId: listDestinationId, columnId: columnDestinationId } = JSON.parse(
         (destination as any).droppableId,
@@ -68,7 +72,7 @@ export const useKanbanProvider = (initialColumns: IColumn[]) => {
           }
         });
       }
-      if (type === 'card' && source.droppableId != destination?.droppableId) {
+      if (type === 'card' && source.droppableId != (destination.droppableId as any)) {
         let removedCard: ICard;
         columns.map((column) => {
           if (column.id === columnSourceId) {

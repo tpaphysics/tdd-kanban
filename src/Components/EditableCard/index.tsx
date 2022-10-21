@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { BsTrashFill } from 'react-icons/bs';
 import { GiRapidshareArrow, GiSupersonicArrow } from 'react-icons/gi';
 import { BsCheckCircle } from 'react-icons/bs';
 

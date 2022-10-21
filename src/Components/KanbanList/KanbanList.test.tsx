@@ -59,7 +59,7 @@ describe('KanbanList.tsx test', () => {
   //
   //  expect(button).toHaveProperty('disabled', true);
   //});
-  it('werwe', () => {
+  it('', () => {
     expect(1).toBe(1);
   });
 });
