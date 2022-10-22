@@ -47,6 +47,7 @@ export const useEditableCard = (initialCard: ICard) => {
   }, [initialCard.id, removeCard]);
 
   return {
+    column,
     list,
     preTask,
     task,

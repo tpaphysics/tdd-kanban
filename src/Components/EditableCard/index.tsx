@@ -20,14 +20,11 @@ import { useEditableCard } from './hook/useEditableCard';
 import { EditableCardsProps } from './interface';
 import EditableControls from './EditableControls/EditableControls';
 import { Draggable } from 'react-beautiful-dnd';
-import { useColumn } from '../../Hooks/useColumn';
 
 function EditableCard({ card, cardIndex }: EditableCardsProps) {
-  //const card = { id: 1, task: 'Task', tag: 'sucess', finished: false };
-  //const list. = 'BLUE';
-
   const {
     list,
+    column,
     preTask,
     finished,
     handleClickTag,
@@ -36,7 +33,6 @@ function EditableCard({ card, cardIndex }: EditableCardsProps) {
     handleClickCloseEdit,
     handleRemoveCard,
   } = useEditableCard(card);
-  const { column } = useColumn();
 
   return (
     <Draggable

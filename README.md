@@ -44,6 +44,7 @@ Each component that has react state has a hook folder to separate the business r
 ```tsx
 function EditableCard({ card, cardIndex }: EditableCardsProps) {
   const {
+    column,
     list,
     preTask,
     finished,
@@ -53,7 +54,6 @@ function EditableCard({ card, cardIndex }: EditableCardsProps) {
     handleClickCloseEdit,
     handleRemoveCard,
   } = useEditableCard(card);
-  const { column } = useColumn();
 
   return (
     <Draggable
@@ -198,6 +198,7 @@ export const useEditableCard = (initialCard: ICard) => {
   }, [initialCard.id, removeCard]);
 
   return {
+    column,
     list,
     preTask,
     task,
@@ -361,7 +362,7 @@ describe('EditableCard.tsx test', () => {
 
 This way we can test each component part separately.
 
-Below is the kanban move function:
+Below is the entire kanban movement logic:
 
 **_onDragEnd function_**
 
