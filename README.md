@@ -50,29 +50,17 @@ export const useEditableCard = (initialCard: ICard) => {
   const { handleUpdateTask, handleUpdateFinished } = useKanban();
 
   const [finished, setFinished] = useState(initialCard.finished);
-  const [preTask, setPreTask] = useState(initialCard.task);
-  const [task, setTask] = useState(initialCard.task);
   const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
+  ... //more states
 
   const handleClickTag = useCallback(() => {
-    ... //logic
-  }, []);
-
-  const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     ... //logic
   }, []);
 
   ...//more functions
 
   return {
-    column,
-    list,
-    preTask,
-    task,
-    setPreTask,
-    setTask,
-    inputRef,
-    finished,
+    ... // more
     handleClickTag,
     handleEditTask,
     handleClickCheck,
@@ -88,9 +76,6 @@ Then the hook is tested in its own file
 
 ```tsx
 describe('useEditableCard hook test', () => {
-  const mockedColumn = columns[0];
-  const mockedList = mockedColumn.lists[0];
-  const mockedCard = mockedList.cards[0];
 
   const wrapper = ({ children }: BoxProps) => (
     ... //logic
@@ -123,10 +108,7 @@ The hook is imported into the component and its states and functions are consume
 ```tsx
 function EditableCard({ card, cardIndex }: EditableCardsProps) {
   const {
-    column,
-    list,
-    preTask,
-    finished,
+    ...//more
     handleClickTag,
     handleEditTask,
     handleClickCheck,
@@ -142,15 +124,12 @@ function EditableCard({ card, cardIndex }: EditableCardsProps) {
 export default EditableCard;
 ```
 
-Finally, tests that simulate user actions are performed:
+Finally, tests are performed that simulate user actions on the component:
 
-**_useEditableCard.test.tsx_**
+**_EditableCard.test.tsx_**
 
 ```tsx
 describe('EditableCard.tsx test', () => {
-  const mockedColumn = columns[0];
-  const mockedList = mockedColumn.lists[0];
-  const mockedCard = mockedList.cards[0];
 
   const ContainerTest = () => (
    ... //logic
