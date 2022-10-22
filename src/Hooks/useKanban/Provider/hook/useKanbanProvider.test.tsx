@@ -205,4 +205,26 @@ describe('useKanbanProvider hook test', () => {
 
     expect(response.task).toBe('DarthVader');
   });
+  it('handleUpdateFinished, Should be updated the card finished', () => {
+    const wrapper = ({ children }: BoxProps) => <KanbanProvider>{children}</KanbanProvider>;
+    const { result } = renderHook(() => useKanban(), { wrapper });
+
+    act(() => {
+      result.current?.setColumns(mockedColumns);
+      //console.log(result.current.columns[0].lists[0].cards[0]);
+    });
+
+    act(() => {
+      result.current?.handleUpdateFinished(
+        result.current.columns[0],
+        result.current.columns[0].lists[0],
+        result.current.columns[0].lists[0].cards[0].id,
+        true,
+      );
+    });
+
+    const response = result.current.columns[0].lists[0].cards[0];
+
+    expect(response.finished).toBe(true);
+  });
 });

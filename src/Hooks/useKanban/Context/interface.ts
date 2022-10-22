@@ -10,5 +10,6 @@ export interface IKanbanContext {
   handleUpdateCards: (column: IColumn, list: IList, updatedCards: ICard[]) => void;
   handleUpdateLists: (column: IColumn, updatedList: IList[]) => void;
   handleUpdateTask: (column: IColumn, list: IList, cardId: string, updatedTask: string) => void;
+  handleUpdateFinished: (column: IColumn, list: IList, cardId: string, finished: boolean) => void;
   onDragEnd: (result: DropResult) => void;
 }

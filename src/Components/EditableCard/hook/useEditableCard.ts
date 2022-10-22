@@ -1,11 +1,15 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { ICard } from '../../../data/interfaces/ICard';
+import { useColumn } from '../../../Hooks/useColumn';
+import { useKanban } from '../../../Hooks/useKanban';
 
 import { useList } from '../../../Hooks/useList';
 import { formatTask } from './utils/utils';
 
 export const useEditableCard = (initialCard: ICard) => {
+  const { column } = useColumn();
   const { list, removeCard } = useList();
+  const { handleUpdateTask } = useKanban();
 
   const [finished, setFinished] = useState(initialCard.finished);
   const [preTask, setPreTask] = useState(initialCard.task);
@@ -25,11 +29,13 @@ export const useEditableCard = (initialCard: ICard) => {
     if (format == '') {
       setTask('Edit task');
       setPreTask('Edit task');
+      handleUpdateTask(column, list, initialCard.id, 'EditTask');
     } else {
       setTask(format);
       setPreTask(format);
+      handleUpdateTask(column, list, initialCard.id, format);
     }
-  }, [preTask]);
+  }, [column, handleUpdateTask, initialCard.id, list, preTask]);
 
   const handleClickCloseEdit = useCallback(() => {
     setPreTask(task);

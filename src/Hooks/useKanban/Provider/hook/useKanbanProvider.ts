@@ -64,6 +64,29 @@ export const useKanbanProvider = (initialColumns: IColumn[]) => {
     [columns],
   );
 
+  const handleUpdateFinished = useCallback(
+    (column: IColumn, list: IList, cardId: string, finished: boolean) => {
+      const updatedColumns = columns.map((columnElement) => {
+        if (columnElement.id === column.id) {
+          columnElement.lists.map((listElement) => {
+            if (listElement.id === list.id) {
+              listElement.cards.map((cardElement) => {
+                if (cardElement.id === cardId) {
+                  cardElement.finished = finished;
+                }
+              });
+            }
+          });
+        }
+        return columnElement;
+      });
+      //console.log(updatedColumns[0]);
+
+      setColumns(updatedColumns);
+    },
+    [columns],
+  );
+
   const onDragEnd = useCallback(
     (result: DropResult) => {
       const { type, source, destination } = result;
@@ -144,5 +167,13 @@ export const useKanbanProvider = (initialColumns: IColumn[]) => {
     [columns],
   );
 
-  return { columns, setColumns, handleUpdateCards, handleUpdateLists, handleUpdateTask, onDragEnd };
+  return {
+    columns,
+    setColumns,
+    handleUpdateCards,
+    handleUpdateLists,
+    handleUpdateTask,
+    handleUpdateFinished,
+    onDragEnd,
+  };
 };

@@ -7,8 +7,15 @@ import { useKanbanProvider } from './hook/useKanbanProvider';
 type KanbanProviderProps = BoxProps;
 
 function KanbanProvider({ children }: KanbanProviderProps) {
-  const { columns, setColumns, handleUpdateCards, handleUpdateLists, handleUpdateTask, onDragEnd } =
-    useKanbanProvider(initialColumns);
+  const {
+    columns,
+    setColumns,
+    handleUpdateCards,
+    handleUpdateLists,
+    handleUpdateTask,
+    handleUpdateFinished,
+    onDragEnd,
+  } = useKanbanProvider(initialColumns);
   return (
     <KanbanContext.Provider
       value={{
@@ -17,6 +24,7 @@ function KanbanProvider({ children }: KanbanProviderProps) {
         handleUpdateCards,
         handleUpdateLists,
         handleUpdateTask,
+        handleUpdateFinished,
         onDragEnd,
       }}
     >
