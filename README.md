@@ -37,7 +37,52 @@ This **tdd Kanban** project was developed as an exercise to develop TDD architec
 <img src="./public/struct.png" alt="tree"/>
 </p>
 
-Each component that has react state has a hook folder to separate the business rules from the TSX component. That way, we were able to test hooks with [React Testing Library](https://react-hooks-testing-library.com/):
+Each component that has react state has a hook folder to separate the business rules from the TSX component. That way, we were able to test hooks with [React Testing Library](https://react-hooks-testing-library.com/).
+
+Each component has its own hook with its use cases.
+
+**_useEditableCard.ts_**
+
+```tsx
+export const useEditableCard = (initialCard: ICard) => {
+  const { column } = useColumn();
+  const { list, removeCard } = useList();
+  const { handleUpdateTask, handleUpdateFinished } = useKanban();
+
+  const [finished, setFinished] = useState(initialCard.finished);
+  const [preTask, setPreTask] = useState(initialCard.task);
+  const [task, setTask] = useState(initialCard.task);
+  const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
+
+  const handleClickTag = useCallback(() => {
+    ...
+  }, []);
+
+  const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    ...
+  }, []);
+
+  ...//more functions
+
+  return {
+    column,
+    list,
+    preTask,
+    task,
+    setPreTask,
+    setTask,
+    inputRef,
+    finished,
+    handleClickTag,
+    handleEditTask,
+    handleClickCheck,
+    handleRemoveCard,
+    handleClickCloseEdit,
+  };
+};
+```
+
+The hook is imported into the component and its states and functions are consumed by the component.
 
 **_📝 index.tsx_**
 
@@ -56,163 +101,11 @@ function EditableCard({ card, cardIndex }: EditableCardsProps) {
   } = useEditableCard(card);
 
   return (
-    <Draggable
-      draggableId={`{"columnId":"${column.id}","cardId":"${card.id}"}`}
-      key={`draggable-card-${card.id}`}
-      index={cardIndex}
-    >
-      {(provided) => (
-        <Box
-          data-testid={`card-${card.id}`}
-          display='flex'
-          flexDir='column'
-          justifyContent='space-between'
-          padding='15px'
-          borderRadius='5px'
-          boxShadow='0px 2px 4px rgba(0, 0, 0, 0.25)'
-          bg='WHITE'
-          w='275px'
-          h='90px'
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <Flex alignItems={'center'} justifyContent='space-between'>
-            <Editable
-              data-testid={`editable-${card.id}`}
-              value={preTask}
-              fontWeight='500'
-              fontSize='16px'
-              lineHeight='21px'
-              variant='none'
-              w='100%'
-              isPreviewFocusable={false}
-            >
-              <Flex>
-                <EditablePreview
-                  cursor='pointer'
-                  fontFamily='Pacifico'
-                  fontSize='18px'
-                  fontStyle='revert-layer'
-                  fontWeight='400'
-                  color='blackAlpha.700'
-                  w='100%'
-                />
-
-                <Input
-                  data-testid={`input-${card.id}`}
-                  fontWeight='500'
-                  fontSize='16px'
-                  lineHeight='21px'
-                  as={EditableInput}
-                  borderRadius='5px'
-                  focusBorderColor={list.bgList}
-                  onChange={handleEditTask}
-                  value={preTask}
-                  px='2px'
-                  h='28px'
-                />
-                <EditableControls
-                  card={card}
-                  handleRemoveCard={handleRemoveCard}
-                  handleClickCheck={handleClickCheck}
-                  handleClickCloseEdit={handleClickCloseEdit}
-                />
-              </Flex>
-            </Editable>
-          </Flex>
-          <Flex alignItems='center' justifyContent='space-between'>
-            <Text onClick={handleClickTag} cursor='pointer' data-testid={`tag-${card.id}`}>
-              <Tag
-                size={'sm'}
-                variant='solid'
-                bg={list.bgList}
-                fontStyle='italic'
-                _hover={{ opacity: '0.8', transitionDuration: '0.3s' }}
-              >
-                <TagLeftIcon as={finished ? GiSupersonicArrow : GiRapidshareArrow} />
-                <TagLabel fontWeight='700' fontSize='12px' color='WHITE'>
-                  {card.tag}
-                </TagLabel>
-              </Tag>
-            </Text>
-            {finished && (
-              <Flex color={'green.400'} alignItems='center' fontStyle='italic'>
-                <Icon as={BsCheckCircle} w='10px' h='12px' />
-                <Text ml='2px' fontSize='10px'>
-                  Finished
-                </Text>
-              </Flex>
-            )}
-          </Flex>
-        </Box>
-      )}
-    </Draggable>
-  );
+    ... //useEditableCard consumption
+  )
 }
 
 export default EditableCard;
-```
-
-**_useEditableCard.ts_**
-
-```tsx
-export const useEditableCard = (initialCard: ICard) => {
-  const { column } = useColumn();
-  const { list, removeCard } = useList();
-  const { handleUpdateTask, handleUpdateFinished } = useKanban();
-
-  const [finished, setFinished] = useState(initialCard.finished);
-  const [preTask, setPreTask] = useState(initialCard.task);
-  const [task, setTask] = useState(initialCard.task);
-  const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
-
-  const handleClickTag = useCallback(() => {
-    setFinished(!finished);
-    handleUpdateFinished(column, list, initialCard.id, !finished);
-  }, [column, finished, handleUpdateFinished, initialCard.id, list]);
-
-  const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setPreTask(event.target.value);
-  }, []);
-
-  const handleClickCheck = useCallback(() => {
-    const format = formatTask(preTask);
-    if (format == '') {
-      setTask('Edit task');
-      setPreTask('Edit task');
-      handleUpdateTask(column, list, initialCard.id, 'EditTask');
-    } else {
-      setTask(format);
-      setPreTask(format);
-      handleUpdateTask(column, list, initialCard.id, format);
-    }
-  }, [column, handleUpdateTask, initialCard.id, list, preTask]);
-
-  const handleClickCloseEdit = useCallback(() => {
-    setPreTask(task);
-  }, [task]);
-
-  const handleRemoveCard = useCallback(() => {
-    removeCard(initialCard.id);
-  }, [initialCard.id, removeCard]);
-
-  return {
-    column,
-    list,
-    preTask,
-    task,
-    setPreTask,
-    setTask,
-    inputRef,
-    finished,
-    handleClickTag,
-    handleEditTask,
-    handleClickCheck,
-    handleRemoveCard,
-    handleClickCloseEdit,
-  };
-};
 ```
 
 **_useEditableCard.test.tsx_**
@@ -247,49 +140,7 @@ describe('useEditableCard hook test', () => {
     });
     expect(result.current.finished).toEqual(true);
   });
-  it('handleClickTag, should be updateded finished state for true', () => {
-    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
-
-    act(() => {
-      result.current.handleClickTag();
-    });
-    expect(result.current.finished).toEqual(false);
-  });
-  it('handleClickCheck, should contain (...) when click in check button and when mockerLargeTaskValue for bigger than 25', () => {
-    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
-    const mockedLargeTaskValue = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-
-    act(() => {
-      result.current.setPreTask(mockedLargeTaskValue);
-    });
-
-    act(() => {
-      result.current.handleClickCheck();
-    });
-
-    expect(result.current.task.includes('...')).toEqual(true);
-  });
-  it('handleClickCheck, should be updateded finished value for (Edit task) when input to be empty', () => {
-    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
-
-    act(() => {
-      result.current.setPreTask('');
-    });
-
-    act(() => {
-      result.current.handleClickCheck();
-    });
-    expect(result.current.task).toEqual('Edit task');
-  });
-
-  it('handleRemoveCard, should be called the function removeCard', () => {
-    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
-
-    act(() => {
-      result.current.handleRemoveCard();
-    });
-    expect(mockedUseList).toBeCalled();
-  });
+  ... //more tests
 });
 ```
 
@@ -333,116 +184,13 @@ describe('EditableCard.tsx test', () => {
     expect(() => getByText('Finished')).toThrow();
   });
 
-  it('Should be possible edit the task', () => {
-    const { getByTestId, getByText } = render(<ContainerTest />);
-    fireEvent.focus(getByTestId(`editable-${mockedCard.id}`));
-    fireEvent.change(getByTestId(`input-${mockedCard.id}`), { target: { value: 'editingTask' } });
-    fireEvent.blur(getByTestId(`input-${mockedCard.id}`));
-
-    expect(getByText('editingTask')).toBeInTheDocument();
-  });
-  it('Should it set the task to (Edit task) when the entry is empty and the enter key is pressed', () => {
-    const { getByTestId, getByText } = render(<ContainerTest />);
-    fireEvent.click(getByTestId(`edit-icon-${mockedCard.id}`));
-    fireEvent.change(getByTestId(`input-${mockedCard.id}`), { target: { value: '' } });
-    fireEvent.click(getByTestId(`check-edit-icon-${mockedCard.id}`));
-
-    expect(getByText('Edit task')).toBeInTheDocument();
-  });
-  it('Should not be edited the card when click on (x) button', () => {
-    const { getByTestId, getByText, debug } = render(<ContainerTest />);
-    fireEvent.click(getByTestId(`edit-icon-${mockedCard.id}`));
-    fireEvent.change(getByTestId(`input-${mockedCard.id}`), { target: { value: 'Click' } });
-    fireEvent.click(getByTestId(`close-edit-icon-${mockedCard.id}`));
-    debug();
-    expect(() => getByText('Click')).toThrow();
-  });
+  ...//more tests
 });
 ```
 
 This way we can test each component part separately.
 
-Below is the entire kanban movement logic:
-
-**_onDragEnd function_**
-
-```tsx
-const onDragEnd = useCallback(
-  (result: DropResult) => {
-    const { type, source, destination } = result;
-
-    if (!destination) return;
-
-    const { listId: listSourceId, columnId: columnSourceId } = JSON.parse(source.droppableId);
-    const { listId: listDestinationId, columnId: columnDestinationId } = JSON.parse(
-      (destination as any).droppableId,
-    );
-
-    const listSourceIndex = source.index;
-    const listDestinationIndex = destination?.index;
-
-    if (type === 'card' && columnSourceId === columnDestinationId) {
-      columns.map((column) => {
-        if (column.id === columnSourceId) {
-          column.lists.map((list) => {
-            if (list.id === listSourceId) {
-              list.cards = changePosition(
-                list.cards,
-                listSourceIndex,
-                listDestinationIndex as number,
-              );
-            }
-          });
-        }
-      });
-    }
-    if (type === 'card' && source.droppableId != (destination.droppableId as any)) {
-      let removedCard: ICard;
-      columns.map((column) => {
-        if (column.id === columnSourceId) {
-          column.lists.map((list) => {
-            if (list.id === listSourceId) {
-              [removedCard] = list.cards.splice(listSourceIndex, 1);
-            }
-          });
-        }
-      });
-
-      columns.map((column) => {
-        if (column.id === columnDestinationId) {
-          column.lists.map((list) => {
-            if (list.id === listDestinationId) {
-              list.cards.splice(listDestinationIndex as any, 0, removedCard);
-            }
-          });
-        }
-      });
-    }
-    if (type === 'list' && columnSourceId === columnDestinationId) {
-      columns.map((column) => {
-        if (column.id === columnSourceId) {
-          column.lists = changePosition(column.lists, listSourceIndex, listDestinationIndex as any);
-        }
-      });
-    }
-    if (type === 'list' && columnSourceId !== columnDestinationId) {
-      let removedList: IList;
-      columns.map((column) => {
-        if (column.id === columnSourceId) {
-          [removedList] = column.lists.splice(listSourceIndex, 1);
-        }
-      });
-
-      columns.map((column) => {
-        if (column.id === columnDestinationId) {
-          column.lists.splice(listDestinationIndex as any, 0, removedList);
-        }
-      });
-    }
-  },
-  [columns],
-);
-```
+All the kanban movement logic is in the onDragEnd function.
 
 ## **💥 Considerations**
 
