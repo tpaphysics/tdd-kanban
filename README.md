@@ -27,6 +27,10 @@
 <img src="./public/app3.gif" alt="desktop3-app" width="800px"/>
 </p>
 
+<p align="center">
+<img src="./public/app4.gif" alt="desktop4-app" width="800px"/>
+</p>
+
 This **tdd Kanban** project was developed as an exercise to develop TDD architecture skills in frontend development. The layout in figma is [here](https://www.figma.com/file/a1Bwfmkw5w2BOdsV4PIeDy/Kanban-Board?node-id=0%3A1). We created a design pattern with the following structure:
 
 <p align="center">
@@ -154,7 +158,9 @@ export default EditableCard;
 
 ```tsx
 export const useEditableCard = (initialCard: ICard) => {
+  const { column } = useColumn();
   const { list, removeCard } = useList();
+  const { handleUpdateTask, handleUpdateFinished } = useKanban();
 
   const [finished, setFinished] = useState(initialCard.finished);
   const [preTask, setPreTask] = useState(initialCard.task);
@@ -163,7 +169,8 @@ export const useEditableCard = (initialCard: ICard) => {
 
   const handleClickTag = useCallback(() => {
     setFinished(!finished);
-  }, [finished]);
+    handleUpdateFinished(column, list, initialCard.id, !finished);
+  }, [column, finished, handleUpdateFinished, initialCard.id, list]);
 
   const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setPreTask(event.target.value);
@@ -174,11 +181,13 @@ export const useEditableCard = (initialCard: ICard) => {
     if (format == '') {
       setTask('Edit task');
       setPreTask('Edit task');
+      handleUpdateTask(column, list, initialCard.id, 'EditTask');
     } else {
       setTask(format);
       setPreTask(format);
+      handleUpdateTask(column, list, initialCard.id, format);
     }
-  }, [preTask, task]);
+  }, [column, handleUpdateTask, initialCard.id, list, preTask]);
 
   const handleClickCloseEdit = useCallback(() => {
     setPreTask(task);
