@@ -41,7 +41,7 @@ Each component that has react state has a hook folder to separate the business r
 
 Each component has its own hook with its use cases.
 
-**_useEditableCard.ts_**
+[**_useEditableCard.ts_**](https://github.com/tpaphysics/tdd-kanban/blob/main/src/Components/EditableCard/hook/useEditableCard.ts)
 
 ```tsx
 export const useEditableCard = (initialCard: ICard) => {
@@ -72,7 +72,7 @@ export const useEditableCard = (initialCard: ICard) => {
 
 Then the hook is tested in its own file
 
-**_useEditableCard.test.tsx_**
+[**_useEditableCard.test.tsx_**](https://github.com/tpaphysics/tdd-kanban/blob/main/src/Components/EditableCard/hook/useEditableCard.test.tsx)
 
 ```tsx
 describe('useEditableCard hook test', () => {
@@ -103,7 +103,7 @@ describe('useEditableCard hook test', () => {
 
 The hook is imported into the component and its states and functions are consumed by the component.
 
-**_📝 index.tsx_**
+[**_📝 index.tsx_**](https://github.com/tpaphysics/tdd-kanban/blob/main/src/Components/EditableCard/index.tsx)
 
 ```tsx
 function EditableCard({ card, cardIndex }: EditableCardsProps) {
@@ -126,7 +126,7 @@ export default EditableCard;
 
 Finally, tests are performed that simulate user actions on the component:
 
-**_EditableCard.test.tsx_**
+[**_EditableCard.test.tsx_**](https://github.com/tpaphysics/tdd-kanban/blob/main/src/Components/EditableCard/EditableCard.test.tsx)
 
 ```tsx
 describe('EditableCard.tsx test', () => {
@@ -153,7 +153,7 @@ describe('EditableCard.tsx test', () => {
 
 This way we can test each component part separately.
 
-All the kanban movement logic is in the onDragEnd function.
+All the kanban movement logic is in the [onDragEnd](https://github.com/tpaphysics/tdd-kanban/blob/main/src/Hooks/useKanban/Provider/hook/useKanbanProvider.ts) function.
 
 ## **💥 Considerations**
 
