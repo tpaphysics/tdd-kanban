@@ -29,7 +29,7 @@ export const useEditableCard = (initialCard: ICard) => {
       setTask(format);
       setPreTask(format);
     }
-  }, [preTask, task]);
+  }, [preTask]);
 
   const handleClickCloseEdit = useCallback(() => {
     setPreTask(task);

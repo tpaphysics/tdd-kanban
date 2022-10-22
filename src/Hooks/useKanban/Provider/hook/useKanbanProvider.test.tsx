@@ -1,7 +1,7 @@
 import { BoxProps } from '@chakra-ui/react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { DropResult } from 'react-beautiful-dnd';
 import uuid from 'react-uuid';
+import { vi } from 'vitest';
 import KanbanProvider from '..';
 import { useKanban } from '../..';
 
@@ -182,5 +182,27 @@ describe('useKanbanProvider hook test', () => {
     const response = result.current.columns[0].lists[0].bgList;
 
     expect(response).toBe('PURPLE');
+  });
+
+  it('handleUpdateTask, Should be updated the card task', () => {
+    const wrapper = ({ children }: BoxProps) => <KanbanProvider>{children}</KanbanProvider>;
+    const { result } = renderHook(() => useKanban(), { wrapper });
+
+    act(() => {
+      result.current?.setColumns(mockedColumns);
+    });
+
+    act(() => {
+      result.current?.handleUpdateTask(
+        result.current.columns[0],
+        result.current.columns[0].lists[0],
+        result.current.columns[0].lists[0].cards[0].id,
+        'DarthVader',
+      );
+    });
+
+    const response = result.current.columns[0].lists[0].cards[0];
+
+    expect(response.task).toBe('DarthVader');
   });
 });
