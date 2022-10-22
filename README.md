@@ -157,7 +157,7 @@ All the kanban movement logic is in the [onDragEnd](https://github.com/tpaphysic
 
 ## **💥 Considerations**
 
-Frontend tests help to standardize and minimize errors, user experience. It facilitates group work between development teams and contributes to a scalable and quality final solution.
+Front end tests help standardize and minimize errors and improve user experience. It makes the work easier and contributes to a scalable and quality final solution.
 
 ## Get Started
 
