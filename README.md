@@ -55,11 +55,11 @@ export const useEditableCard = (initialCard: ICard) => {
   const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
 
   const handleClickTag = useCallback(() => {
-    ...
+    ... //logic
   }, []);
 
   const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    ...
+    ... //logic
   }, []);
 
   ...//more functions
@@ -80,6 +80,40 @@ export const useEditableCard = (initialCard: ICard) => {
     handleClickCloseEdit,
   };
 };
+```
+
+Then the hook is tested in its own file
+
+**_useEditableCard.test.tsx_**
+
+```tsx
+describe('useEditableCard hook test', () => {
+  const mockedColumn = columns[0];
+  const mockedList = mockedColumn.lists[0];
+  const mockedCard = mockedList.cards[0];
+
+  const wrapper = ({ children }: BoxProps) => (
+    ... //logic
+  );
+
+  const mockedUseList = vi
+    .spyOn(useList, 'useList')
+    .mockImplementation(
+      () => ({ list: mockedList, AddCard: vi.fn(), removedCard: vi.fn() } as any),
+    );
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('should be false the finished state by default', () => {
+    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
+    act(() => {
+      result.current.finished;
+    });
+    expect(result.current.finished).toEqual(true);
+  });
+  ... //more tests
+});
 ```
 
 The hook is imported into the component and its states and functions are consumed by the component.
@@ -108,45 +142,9 @@ function EditableCard({ card, cardIndex }: EditableCardsProps) {
 export default EditableCard;
 ```
 
-**_useEditableCard.test.tsx_**
-
-```tsx
-describe('useEditableCard hook test', () => {
-  const mockedColumn = columns[0];
-  const mockedList = mockedColumn.lists[0];
-  const mockedCard = mockedList.cards[0];
-
-  const wrapper = ({ children }: BoxProps) => (
-    <KanbanProvider>
-      <KanbanColumnProvider initialColumn={mockedColumn}>
-        <KanbanListProvider initialList={mockedList}>{children}</KanbanListProvider>
-      </KanbanColumnProvider>
-    </KanbanProvider>
-  );
-
-  const mockedUseList = vi
-    .spyOn(useList, 'useList')
-    .mockImplementation(
-      () => ({ list: mockedList, AddCard: vi.fn(), removedCard: vi.fn() } as any),
-    );
-  beforeEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  it('should be false the finished state by default', () => {
-    const { result } = renderHook(() => useEditableCard(mockedCard), { wrapper });
-    act(() => {
-      result.current.finished;
-    });
-    expect(result.current.finished).toEqual(true);
-  });
-  ... //more tests
-});
-```
-
-**_useEditableCard.test.tsx_**
-
 Finally, tests that simulate user actions are performed:
+
+**_useEditableCard.test.tsx_**
 
 ```tsx
 describe('EditableCard.tsx test', () => {
@@ -155,21 +153,7 @@ describe('EditableCard.tsx test', () => {
   const mockedCard = mockedList.cards[0];
 
   const ContainerTest = () => (
-    <KanbanProvider>
-      <KanbanColumnProvider initialColumn={mockedColumn}>
-        <KanbanListProvider initialList={mockedList}>
-          <DragDropContext onDragEnd={console.log}>
-            <Droppable droppableId='some_id'>
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  <EditableCard card={mockedCard} cardIndex={0} />
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </KanbanListProvider>
-      </KanbanColumnProvider>
-    </KanbanProvider>
+   ... //logic
   );
 
   it('Should finished tag not to be in component', () => {
