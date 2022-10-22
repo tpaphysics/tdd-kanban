@@ -80,7 +80,7 @@ export const useKanbanProvider = (initialColumns: IColumn[]) => {
         }
         return columnElement;
       });
-      //console.log(updatedColumns[0]);
+      console.log(updatedColumns[0]);
 
       setColumns(updatedColumns);
     },

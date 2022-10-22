@@ -9,7 +9,7 @@ import { formatTask } from './utils/utils';
 export const useEditableCard = (initialCard: ICard) => {
   const { column } = useColumn();
   const { list, removeCard } = useList();
-  const { handleUpdateTask } = useKanban();
+  const { handleUpdateTask, handleUpdateFinished } = useKanban();
 
   const [finished, setFinished] = useState(initialCard.finished);
   const [preTask, setPreTask] = useState(initialCard.task);
@@ -18,7 +18,8 @@ export const useEditableCard = (initialCard: ICard) => {
 
   const handleClickTag = useCallback(() => {
     setFinished(!finished);
-  }, [finished]);
+    handleUpdateFinished(column, list, initialCard.id, !finished);
+  }, [column, finished, handleUpdateFinished, initialCard.id, list]);
 
   const handleEditTask = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setPreTask(event.target.value);
