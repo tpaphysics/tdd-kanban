@@ -24,8 +24,7 @@ function App() {
       //justifyContent={'center'}
     >
       <Flex
-        w='100%'
-        minW='100vw'
+        w='100vw'
         h='50px'
         alignItems='center'
         justifyContent='center'
