@@ -27,10 +27,6 @@
 <img src="./public/app3.gif" alt="desktop3-app" width="800px"/>
 </p>
 
-<p align="center">
-<img src="./public/app4.gif" alt="desktop4-app" width="800px"/>
-</p>
-
 This **tdd Kanban** project was developed as an exercise to develop TDD architecture skills in frontend development. The layout in figma is [here](https://www.figma.com/file/a1Bwfmkw5w2BOdsV4PIeDy/Kanban-Board?node-id=0%3A1). We created a design pattern with the following structure:
 
 <p align="center">
