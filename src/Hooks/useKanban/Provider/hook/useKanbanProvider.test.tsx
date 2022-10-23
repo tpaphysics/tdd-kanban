@@ -1,7 +1,6 @@
 import { BoxProps } from '@chakra-ui/react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import uuid from 'react-uuid';
-import { vi } from 'vitest';
 import KanbanProvider from '..';
 import { useKanban } from '../..';
 

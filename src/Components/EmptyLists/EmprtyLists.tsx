@@ -11,18 +11,18 @@ function EmptyLists() {
       alignItems='center'
       justifyContent='center'
       w='315px'
-      h='90px'
+      h='180px'
       borderRadius='5px'
-      bg='blackAlpha.200'
+      bg='blackAlpha.50'
     >
-      <Text fontSize='16px' fontFamily='Pacifico' color='blackAlpha.400'>
+      <Text fontSize='16px' fontFamily='Pacifico' color='blackAlpha.300'>
         You don't have lists
       </Text>
       <Icon
         ml='16px'
         aria-label='add-new-list'
         as={RiFileList3Line}
-        color='blackAlpha.400'
+        color='blackAlpha.300'
         w='30px'
         h='30px'
       />
