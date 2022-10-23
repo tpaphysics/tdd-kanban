@@ -1,10 +1,14 @@
-import { Button, Flex, HStack, Text, Link } from '@chakra-ui/react';
+import { Button, Flex, HStack, Text, Link, useBreakpointValue, VStack } from '@chakra-ui/react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import KanbanColumnsContainer from './Components/KanbanColumnsContainer/KanbanColumnsContainer';
+import KanbanColumn from './Components/KanbanColumn';
 import { useKanban } from './Hooks/useKanban';
 
 function App() {
-  const { onDragEnd } = useKanban();
+  const { columns, onDragEnd } = useKanban();
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
 
   return (
     <Flex
@@ -43,7 +47,22 @@ function App() {
 
       <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto' flex='1'>
         <DragDropContext onDragEnd={onDragEnd}>
-          <KanbanColumnsContainer />
+          {isWideVersion ? (
+            columns.map((column) => <KanbanColumn initialColumn={column} key={column.id} />)
+          ) : (
+            <VStack>
+              <Flex gap='2'>
+                {columns.map((column, index) => {
+                  if (index < 2) return <KanbanColumn initialColumn={column} key={column.id} />;
+                })}
+              </Flex>
+              <Flex gap='2'>
+                {columns.map((column, index) => {
+                  if (index > 1) return <KanbanColumn initialColumn={column} key={column.id} />;
+                })}
+              </Flex>
+            </VStack>
+          )}
         </DragDropContext>
       </HStack>
     </Flex>
