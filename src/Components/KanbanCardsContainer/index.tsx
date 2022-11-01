@@ -2,7 +2,7 @@ import { VStack } from '@chakra-ui/react';
 import React from 'react';
 
 import { useList } from '../../Hooks/useList';
-import EditableCard from '../EditableCard';
+import DragEditableCard from '../DragEditableCard';
 import EmptyCards from '../EmptyCards/EmptyCards';
 
 function KanbanCardsContainer() {
@@ -13,7 +13,7 @@ function KanbanCardsContainer() {
         <EmptyCards />
       ) : (
         list.cards.map((card, index) => (
-          <EditableCard card={card} key={card.id} cardIndex={index} />
+          <DragEditableCard card={card} key={card.id} cardIndex={index} />
         ))
       )}
     </VStack>
