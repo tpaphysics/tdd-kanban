@@ -1,6 +1,6 @@
 import { BoxProps } from '@chakra-ui/react';
-import { IList } from '../../data/interfaces/IList';
+import { DroppableProvided } from 'react-beautiful-dnd';
 
 export interface KanbanListProps extends BoxProps {
-  list: IList;
+  provided?: DroppableProvided;
 }
