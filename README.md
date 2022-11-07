@@ -13,9 +13,12 @@
 <br/>
 <br/>
 
-## **💻 Project**
+## **🌐 Website**
 
-http://tdd-kanban.vercel.app/
+Deploy on vercel:
+[http://tdd-kanban.vercel.app/](http://tdd-kanban.vercel.app/)
+
+## **💻 Project**
 
 <p align="center">
 <img src="./public/app1.gif" alt="desktop-app" width="800px"/>
