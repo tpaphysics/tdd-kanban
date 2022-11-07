@@ -42,7 +42,7 @@ function App() {
         bgGradient='linear(to-r, TEAL, PURPLE)'
       >
         <Text fontWeight='500' color='RGBA1'>
-          Build faster your tasks with TDD Kanban 💎
+          {isLargerThan670 ? 'Build faster your tasks with TDD Kanban 💎' : 'TDD Kanban 💎'}
         </Text>
         <Link
           href='https://github.com/tpaphysics/tdd-kanban'
