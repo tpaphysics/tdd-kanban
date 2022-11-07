@@ -2,7 +2,6 @@ import { BoxProps } from '@chakra-ui/react';
 import { act, renderHook } from '@testing-library/react';
 import { describe, it, vi } from 'vitest';
 import columns from '../../../data/columns';
-import lists from '../../../data/lists';
 import KanbanColumnProvider from '../../../Hooks/useColumn/Provider';
 import KanbanProvider from '../../../Hooks/useKanban/Provider';
 import * as useList from '../../../Hooks/useList';

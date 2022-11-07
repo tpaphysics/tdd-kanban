@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom/extend-expect';
 
 import { describe, it } from 'vitest';
-import { fireEvent, render } from '@testing-library/react';
-
-import KanbanList from '.';
-import columns from '../../data/columns';
-import KanbanProvider from '../../Hooks/useKanban/Provider';
-import KanbanListProvider from '../../Hooks/useList/Provider';
-import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
-import { useList } from '../../Hooks/useList';
+//import { fireEvent, render } from '@testing-library/react';
+//
+//import KanbanList from '.';
+//import columns from '../../data/columns';
+//import KanbanProvider from '../../Hooks/useKanban/Provider';
+//import KanbanListProvider from '../../Hooks/useList/Provider';
+//import KanbanColumnProvider from '../../Hooks/useColumn/Provider';
+//import { useList } from '../../Hooks/useList';
 
 describe('KanbanList.tsx test', () => {
   //const mockedColumn = columns[0];
