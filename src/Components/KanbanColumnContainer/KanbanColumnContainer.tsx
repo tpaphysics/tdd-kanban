@@ -1,7 +1,9 @@
-import { StackProps, VStack } from '@chakra-ui/react';
+import { StackProps, useMediaQuery, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 function KanbanColumnContainer({ children }: StackProps) {
+  const [isLargerThan1365] = useMediaQuery('(min-width: 1365px)');
+
   return (
     <VStack
       bg='blackAlpha.200'
@@ -10,7 +12,7 @@ function KanbanColumnContainer({ children }: StackProps) {
       px='2'
       borderRadius='5px'
       h='100%'
-      minH='calc(100vh - 80px)'
+      minH={isLargerThan1365 ? 'calc(100vh - 80px)' : 'calc(50vh - 80px)'}
       w='330px'
     >
       {children}

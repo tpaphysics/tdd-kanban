@@ -1,25 +1,13 @@
-import {
-  Button,
-  Flex,
-  HStack,
-  Text,
-  Link,
-  useBreakpointValue,
-  VStack,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Button, Flex, HStack, Text, Link, VStack, useMediaQuery } from '@chakra-ui/react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import KanbanColumn from './Components/KanbanColumn';
 import { useKanban } from './Hooks/useKanban';
 
 function App() {
   const { columns, onDragEnd } = useKanban();
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    lg: true,
-  });
 
   const [isLargerThan670] = useMediaQuery('(min-width: 670px)');
+  const [isLargerThan1365] = useMediaQuery('(min-width: 1365px)');
 
   return (
     <Flex
@@ -57,7 +45,7 @@ function App() {
 
       <HStack alignItems='baseline' mt='4' mb='2' h='100%' mx='auto' flex='1'>
         <DragDropContext onDragEnd={onDragEnd}>
-          {isWideVersion ? (
+          {isLargerThan1365 ? (
             columns.map((column) => <KanbanColumn initialColumn={column} key={column.id} />)
           ) : isLargerThan670 ? (
             <VStack>

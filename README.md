@@ -15,7 +15,7 @@
 
 ## **🌐 Website**
 
-Deploy on vercel:
+Deploy on Vercel:
 [http://tdd-kanban.vercel.app/](http://tdd-kanban.vercel.app/)
 
 ## **💻 Project**
